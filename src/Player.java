@@ -9,23 +9,25 @@ public class Player {
 
     /**
      * Player Constructor
+     *
      * @param uName
      */
-    public Player(String uName){
+    public Player(String uName) {
 
         username = uName;
         totalGuesses = 0;
-        cryptogramsPlayed=0;
-        cryptogramsCompleted=0;
+        cryptogramsPlayed = 0;
+        cryptogramsCompleted = 0;
 
     }
 
 
     /**
      * Method which will update the players accuracy
+     *
      * @param newAccuracy
      */
-    public void updateAccuracy(int newAccuracy){
+    public void updateAccuracy(int newAccuracy) {
 
         accuracy = newAccuracy;
 
@@ -35,7 +37,7 @@ public class Player {
     /**
      * Method to increment the number of games played by one
      */
-    public void incrementCryptogramsCompleted(){
+    public void incrementCryptogramsCompleted() {
 
         cryptogramsCompleted++;
     }
@@ -43,6 +45,7 @@ public class Player {
 
     /**
      * Getter method for accuracy
+     *
      * @return accuracy
      */
     public int getAccuracy() {
@@ -52,6 +55,7 @@ public class Player {
 
     /**
      * Getter method for for cryptogramsPlayed
+     *
      * @return
      */
     public int getCryptogramsPlayed() {
@@ -61,6 +65,7 @@ public class Player {
 
     /**
      * Getter Method for cryptogramsCompleted
+     *
      * @return cryptogramsCompleted
      */
     public int getCryptogramsCompleted() {

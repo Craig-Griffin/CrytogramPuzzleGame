@@ -10,22 +10,22 @@ public class Game {
     }
 
     public void mapLetter(char cipher, char mapping) {
-        if(!Character.isAlphabetic(cipher)) {
+        if (!Character.isAlphabetic(cipher)) {
             System.out.println("Error! " + cipher + " is not an alphabetic character!");
             return;
         }
 
-        if(!Character.isAlphabetic(mapping)) {
+        if (!Character.isAlphabetic(mapping)) {
             System.out.println("Error! " + mapping + " is not an alphabetic character!");
             return;
         }
 
-        if(currentMapping.containsKey(cipher)) {
+        if (currentMapping.containsKey(cipher)) {
             System.out.println(cipher + " already has a mapping! You mapped " + currentMapping.get(cipher) + " to it!");
             return;
         }
 
-        if(currentMapping.containsValue(mapping)) {
+        if (currentMapping.containsValue(mapping)) {
             System.out.println("You already mapped " + currentMapping.getReverse(mapping) + " to " + mapping + "!");
             return;
         }
@@ -49,7 +49,7 @@ public class Game {
 
     }
 
-    public void getFrequencies(){
+    public void getFrequencies() {
 
     }
 

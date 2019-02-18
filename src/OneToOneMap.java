@@ -18,7 +18,7 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
 
     @Override
     public V put(K k, V v) {
-        if(reverseMap.containsKey(v)) {
+        if (reverseMap.containsKey(v)) {
             System.out.println(v + " is already mapped to " + reverseMap.get(v));
             return null;
 
@@ -43,7 +43,7 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
         reverseMap.remove(oldV);
         reverseMap.put(oldV, k);
         super.replace(k, newV);
-        return  newV;
+        return newV;
     }
 
 }
