@@ -56,7 +56,11 @@ public class App{
 			String username = promptUser("**Login** \n Please enter your username");
 
 			if(userNameExists(username)) {
-				System.out.println("welcome back..." + username);
+				
+				Player current = new Player(username, 0, 0, 0);
+				
+				
+				System.out.println("welcome back..." + current.getUsername());
 			}
 			else{
 				System.out.println("counld not find your username");
@@ -76,8 +80,11 @@ public class App{
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while((line = bufferedReader.readLine()) != null) {
-
-				if(line.equals(userName)) {
+				
+				String username = line.split(" ")[0];
+				
+				if(username.equals(userName)) {
+					
 					valid = true;
 
 				}

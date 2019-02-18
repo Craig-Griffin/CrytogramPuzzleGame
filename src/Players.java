@@ -14,7 +14,6 @@ public class Players {
 	private ArrayList<Player> allPlayers;
 	private final String FILENAME = "allplayers.txt";
 
-
 	/**
 	 * Add a new player to the file
 	 */
@@ -31,7 +30,6 @@ public class Players {
 
 	}
 
-
 	/**
 	 * Remove a player from the system
 	 */
@@ -40,7 +38,6 @@ public class Players {
 		//Remove player from file
 
 	}
-
 
 	/**
 	 * ??
@@ -51,7 +48,6 @@ public class Players {
 
 	}
 
-
 	/**
 	 * Find a player on the system
 	 */
@@ -61,14 +57,12 @@ public class Players {
 		return null;
 	}
 
-
 	/**
 	 * Getter method for allPlayers
 	 */
 	public ArrayList<Player> getAllPlayersAccuracies() {
 		return allPlayers;
 	}
-
 
 	/**
 	 *
@@ -96,7 +90,6 @@ public class Players {
 			e.printStackTrace();
 		}
 	}
-
 
 	/**
 	 *
@@ -131,6 +124,17 @@ public class Players {
 
 		}
 		return valid;
+	}
+	
+	/**
+	 * TODO
+	 * add methods to get individual pieces of data from the file
+	 * fix validation problem 
+	 * 
+	 */
+	
+	public String getcurrent() {
+		return "something";
 	}
 
 }

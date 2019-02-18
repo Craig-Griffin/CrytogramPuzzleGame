@@ -6,7 +6,6 @@ public class Player {
 	private int cryptogramsPlayed;
 	private int cryptogramsCompleted;
 
-
 	/**
 	 * Constructor for a new player (i.e. there is no data saved on them yet)
 	 */
@@ -18,7 +17,6 @@ public class Player {
 		cryptogramsCompleted = 0;
 
 	}
-
 
 	/**
 	 * Constructor for a returning player who will already have statistics 
@@ -32,7 +30,6 @@ public class Player {
 
 	}
 
-
 	/**
 	 * Setter Method for accuracy
 	 */
@@ -42,7 +39,6 @@ public class Player {
 
 	}
 
-
 	/**
 	 * Increment the number of games played by one
 	 */
@@ -51,7 +47,6 @@ public class Player {
 		cryptogramsCompleted++;
 	}
 
-
 	/**
 	 * Getter Method for accuracy
 	 */
@@ -59,7 +54,6 @@ public class Player {
 
 		return accuracy;
 	}
-
 
 	/**
 	 * Getter method for username
@@ -70,7 +64,6 @@ public class Player {
 
 	}
 
-
 	/**
 	 * Getter method for getCryptogramsPlayed
 	 */
@@ -79,7 +72,6 @@ public class Player {
 		return cryptogramsPlayed;
 	}
 
-
 	/**
 	 * Getter method for cryptogramsCompleted
 	 */
@@ -87,7 +79,6 @@ public class Player {
 
 		return cryptogramsCompleted;
 	}
-	
 	
 	/**
 	 * Getter method for totalGuesses
