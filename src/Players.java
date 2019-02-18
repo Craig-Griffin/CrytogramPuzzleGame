@@ -11,132 +11,127 @@ import java.util.ArrayList;
 
 public class Players {
 
-	private ArrayList<Player> allPlayers;
-	private final String FILENAME = "allplayers.txt";
+    private ArrayList < Player > allPlayers;
+    private final String FILENAME = "allplayers.txt";
 
-	/**
-	 * Add a new player to the file
-	 */
-	public void addPlayer(Player p) throws IOException {
+    /**
+     * Add a new player to the file
+     */
+    public void addPlayer(Player p) throws IOException {
 
-		if(validateUserName(p)) {
+        if (validateUserName(p)) {
 
-			writeUser(p);
+            writeUser(p);
 
-		}
-		else {
-			System.out.println("Username all ready exists!");
-		}
+        } else {
+            System.out.println("Username all ready exists!");
+        }
 
-	}
+    }
 
-	/**
-	 * Remove a player from the system
-	 */
-	public void removePlayer(Player p) {
+    /**
+     * Remove a player from the system
+     */
+    public void removePlayer(Player p) {
 
-		//Remove player from file
+        //Remove player from file
 
-	}
+    }
 
-	/**
-	 * ??
-	 */
-	public void savePlayer(Player p) {
+    /**
+     * ??
+     */
+    public void savePlayer(Player p) {
 
-		//Save player to file
+        //Save player to file
 
-	}
+    }
 
-	/**
-	 * Find a player on the system
-	 */
-	public Player findPlayer() {
+    /**
+     * Find a player on the system
+     */
+    public Player findPlayer() {
 
-		//Look through file for a file
-		return null;
-	}
+        //Look through file for a file
+        return null;
+    }
 
-	/**
-	 * Getter method for allPlayers
-	 */
-	public ArrayList<Player> getAllPlayersAccuracies() {
-		return allPlayers;
-	}
+    /**
+     * Getter method for allPlayers
+     */
+    public ArrayList < Player > getAllPlayersAccuracies() {
+        return allPlayers;
+    }
 
-	/**
-	 *
-	 */
-	public void writeUser(Player p) throws IOException {
+    /**
+     *
+     */
+    public void writeUser(Player p) throws IOException {
 
-		try {
+        try {
 
-			File file = new File(FILENAME);
+            File file = new File(FILENAME);
 
-			if (!file.exists()) {
-				file.createNewFile();
-			}
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
-			FileWriter fr = new FileWriter(file, true);
-			BufferedWriter br = new BufferedWriter(fr);
-			PrintWriter pr = new PrintWriter(br);
-			pr.println(p.getUsername()+ " " + p.getCryptogramsPlayed()+ " "+ p.getCryptogramsCompleted()+ " "+ p.getAccuracy());
-			pr.close();
-			br.close();
-			fr.close();
-
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 *
-	 */
-	public boolean validateUserName(Player p) {
-
-		String line = " ";
-		boolean valid = true;
-
-		try {
-
-			FileReader fileReader = new FileReader(FILENAME);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-			while((line = bufferedReader.readLine()) != null) {
-
-				//Getting the user name from the file
-				String username = line.split(" ")[0];
-
-				if(username.equals(p.getUsername())) {
-					valid = false;
-				}
-			}
-			bufferedReader.close();
-		}
-		catch(FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + FILENAME + "'");
-		}
-		catch(IOException ex) {
-			System.out.println("Error reading file '" + FILENAME + "'");
+            FileWriter fr = new FileWriter(file, true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter pr = new PrintWriter(br);
+            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
+            pr.close();
+            br.close();
+            fr.close();
 
 
-		}
-		return valid;
-	}
-	
-	/**
-	 * TODO
-	 * add methods to get individual pieces of data from the file
-	 * fix validation problem 
-	 * 
-	 */
-	
-	public String getcurrent() {
-		return "something";
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     */
+    public boolean validateUserName(Player p) {
+
+        String line = " ";
+        boolean valid = true;
+
+        try {
+
+            FileReader fileReader = new FileReader(FILENAME);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+
+                //Getting the user name from the file
+                String username = line.split(" ")[0];
+
+                if (username.equals(p.getUsername())) {
+                    valid = false;
+                }
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + FILENAME + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + FILENAME + "'");
+
+
+        }
+        return valid;
+    }
+
+    /**
+     * TODO
+     * add methods to get individual pieces of data from the file
+     * fix validation problem 
+     * 
+     */
+
+    public String getcurrent() {
+        return "something";
+    }
 
 }
-
-

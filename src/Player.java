@@ -1,90 +1,90 @@
 public class Player {
 
-	private String username;
-	private int accuracy;
-	private int totalGuesses;
-	private int cryptogramsPlayed;
-	private int cryptogramsCompleted;
+    private String username;
+    private int accuracy;
+    private int totalGuesses;
+    private int cryptogramsPlayed;
+    private int cryptogramsCompleted;
 
-	/**
-	 * Constructor for a new player (i.e. there is no data saved on them yet)
-	 */
-	public Player(String uName) {
+    /**
+     * Constructor for a new player (i.e. there is no data saved on them yet)
+     */
+    public Player(String uName) {
 
-		username = uName;
-		totalGuesses = 0;
-		cryptogramsPlayed = 0;
-		cryptogramsCompleted = 0;
+        username = uName;
+        totalGuesses = 0;
+        cryptogramsPlayed = 0;
+        cryptogramsCompleted = 0;
 
-	}
+    }
 
-	/**
-	 * Constructor for a returning player who will already have statistics 
-	 */
-	public Player(String uName, int totGuess, int totPlayed,int totCompleted) {
+    /**
+     * Constructor for a returning player who will already have statistics 
+     */
+    public Player(String uName, int totGuess, int totPlayed, int totCompleted) {
 
-		username = uName;
-		totalGuesses = totGuess;
-		cryptogramsPlayed = totPlayed;
-		cryptogramsCompleted = totCompleted;
+        username = uName;
+        totalGuesses = totGuess;
+        cryptogramsPlayed = totPlayed;
+        cryptogramsCompleted = totCompleted;
 
-	}
+    }
 
-	/**
-	 * Setter Method for accuracy
-	 */
-	public void updateAccuracy(int newAccuracy) {
+    /**
+     * Setter Method for accuracy
+     */
+    public void updateAccuracy(int newAccuracy) {
 
-		accuracy = newAccuracy;
+        accuracy = newAccuracy;
 
-	}
+    }
 
-	/**
-	 * Increment the number of games played by one
-	 */
-	public void incrementCryptogramsCompleted() {
+    /**
+     * Increment the number of games played by one
+     */
+    public void incrementCryptogramsCompleted() {
 
-		cryptogramsCompleted++;
-	}
+        cryptogramsCompleted++;
+    }
 
-	/**
-	 * Getter Method for accuracy
-	 */
-	public int getAccuracy() {
+    /**
+     * Getter Method for accuracy
+     */
+    public int getAccuracy() {
 
-		return accuracy;
-	}
+        return accuracy;
+    }
 
-	/**
-	 * Getter method for username
-	 */
-	public String getUsername() {
+    /**
+     * Getter method for username
+     */
+    public String getUsername() {
 
-		return username;
+        return username;
 
-	}
+    }
 
-	/**
-	 * Getter method for getCryptogramsPlayed
-	 */
-	public int getCryptogramsPlayed() {
+    /**
+     * Getter method for getCryptogramsPlayed
+     */
+    public int getCryptogramsPlayed() {
 
-		return cryptogramsPlayed;
-	}
+        return cryptogramsPlayed;
+    }
 
-	/**
-	 * Getter method for cryptogramsCompleted
-	 */
-	public int getCryptogramsCompleted() {
+    /**
+     * Getter method for cryptogramsCompleted
+     */
+    public int getCryptogramsCompleted() {
 
-		return cryptogramsCompleted;
-	}
-	
-	/**
-	 * Getter method for totalGuesses
-	 */
-	public int totalGuesses() {
-		
-		return totalGuesses;
-	}
+        return cryptogramsCompleted;
+    }
+
+    /**
+     * Getter method for totalGuesses
+     */
+    public int totalGuesses() {
+
+        return totalGuesses;
+    }
 }
