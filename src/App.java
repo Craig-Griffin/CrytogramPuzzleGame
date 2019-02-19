@@ -4,10 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+
 public class App {
 
     private final static String FILENAME = "allplayers.txt";
 
+    
+    /*MAIN GAME LOOP*/
+    
     public static void main(String[] args) throws IOException {
 
         login();
@@ -16,9 +21,12 @@ public class App {
 
 
 
+    
+    /* Some methods to help with the testing of player and players class. Probs can do these better */
+    
     public static String promptUser(String message) {
 
-        System.out.println(message);
+        System.out.print(message);
         Scanner sc = new Scanner(System.in);
         String store = sc.nextLine();
         return store;
@@ -30,35 +38,55 @@ public class App {
 
         System.out.println("Welome to the game!!\n");
 
-        String choice = promptUser("-S to sign up \n-L to login\n\n=>");
+        String choice = promptUser("-S to sign up \n-L to login\n\n=> ");
 
         if (choice.equals("s") || choice.equals("S")) {
 
 
-            String username = promptUser("**Sign Up** \n enter a username\n\n=>");
+            String username = promptUser("**Sign Up** \n enter a username\n\n=> ");
             boolean valid = false;
 
 
             while (!valid) {
-
-                username = promptUser("\n enter a username\n\n=>");
+            	
                 Player newPlayer = new Player(username);
 
                 if (allPlayers.validateUserName(newPlayer)) {
+
                     allPlayers.addPlayer(newPlayer);
                     valid = true;
+                    System.out.println("Sign up Succesful\n");
+
                 }
+                else{
+
+                  username = promptUser("\n That user name already exists enter another username\n\n=> ");
+
+              }
             }
 
         } else if (choice.equals("L") || choice.equals("l")) {
-            String username = promptUser("**Login** \n Please enter your username");
+            String username = promptUser("**Login** \n Please enter your username\n\n=>");
 
             if (userNameExists(username)) {
 
-                Player current = new Player(username, 0, 0, 0);
+                ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(username);
+                
+                
+                Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2));
+                System.out.println(playerStats.get(2));
+                System.out.println(current.getCryptogramsPlayed());
+                
 
 
-                System.out.println("welcome back..." + current.getUsername());
+
+                System.out.println("welcome back..." + current.getUsername() 
+                + " your current stats are...\n Cryptograms Played - " + current.getCryptogramsPlayed() + 
+                "\n Cryptograms Completed - " + current.getCryptogramsCompleted() +
+                "\n Cryptograms Accuracy - " + current.getAccuracy());
+                		
+                
+
             } else {
                 System.out.println("counld not find your username");
             }
@@ -98,7 +126,5 @@ public class App {
         return valid;
 
     }
-
-
 
 }
