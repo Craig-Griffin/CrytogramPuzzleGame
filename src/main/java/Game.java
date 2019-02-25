@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
     private OneToOneMap<Character, Character> currentMapping;
@@ -78,6 +75,15 @@ public class Game {
     }
 
     private void generateCrypto() {
+        ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
+        ArrayList<Character> shuffled = new ArrayList<>(alphabet);
+        Collections.shuffle(shuffled);
+
+        for(int i = 0; i < alphabet.size(); i++) {
+            solutionMapping.put(alphabet.get(i), shuffled.get(i));
+        }
+
+        System.out.println(solutionMapping.toString());
 
     }
 
@@ -85,14 +91,7 @@ public class Game {
         HashSet<Character> unmapped = Reference.getAlphaSet();
         unmapped.removeAll(currentMapping.keySet());
 
-        Iterator<Character> iterator = unmapped.iterator();
-
-        ArrayList<Character> list = new ArrayList<>();
-        while(iterator.hasNext()) {
-            list.add(iterator.next());
-        }
-
-        return list;
+        return new ArrayList<>(unmapped);
     }
 
     enum MappingType {

@@ -7,9 +7,9 @@ public class App {
 
     private final static String FILENAME = "allplayers.txt";
 
-    
+
     /*MAIN GAME LOOP*/
-    
+
     public static void main(String[] args) throws IOException {
 
         login();
@@ -18,9 +18,9 @@ public class App {
 
 
 
-    
+
     /* Some methods to help with the testing of player and players class. Probs can do these better */
-    
+
     public static String promptUser(String message) {
 
         System.out.print(message);
@@ -52,7 +52,7 @@ public class App {
 
 
             while (!valid) {
-            	
+
                 Player newPlayer = new Player(username);
 
                 if (allPlayers.validateUserName(newPlayer)) {
