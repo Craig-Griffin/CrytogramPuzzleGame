@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 import java.util.ArrayList;
@@ -36,9 +33,16 @@ public class App {
 
         Players allPlayers = new Players();
 
+        File file = new File(FILENAME);
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+
         System.out.println("Welome to the game!!\n");
 
-        String choice = promptUser("-S to sign up \n-L to login\n\n=> ");
+        String choice = promptUser("-S to sign up \n-L to login\n-R to remove player\n=> ");
 
         if (choice.equals("s") || choice.equals("S")) {
 
@@ -66,29 +70,34 @@ public class App {
             }
 
         } else if (choice.equals("L") || choice.equals("l")) {
-            String username = promptUser("**Login** \n Please enter your username\n\n=>");
+            String username = promptUser("**Login** \n Please enter your username\n\n=> ");
 
             if (userNameExists(username)) {
 
                 ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(username);
-                
-                
+
+
                 Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2));
                 System.out.println(playerStats.get(2));
                 System.out.println(current.getCryptogramsPlayed());
-                
 
 
+                System.out.println("welcome back..." + current.getUsername()
+                        + " your current stats are...\n Cryptograms Played - " + current.getCryptogramsPlayed() +
+                        "\n Cryptograms Completed - " + current.getCryptogramsCompleted() +
+                        "\n Cryptograms Accuracy - " + current.getAccuracy());
 
-                System.out.println("welcome back..." + current.getUsername() 
-                + " your current stats are...\n Cryptograms Played - " + current.getCryptogramsPlayed() + 
-                "\n Cryptograms Completed - " + current.getCryptogramsCompleted() +
-                "\n Cryptograms Accuracy - " + current.getAccuracy());
-                		
-                
 
             } else {
-                System.out.println("counld not find your username");
+                System.out.println("could not find your username");
+            }
+        } else if (choice.equals("R")) {
+            String usernameToRemove = promptUser("**Removing** \n Enter player username to remove\n\n=> ");
+            if (userNameExists(usernameToRemove)) {
+                allPlayers.removePlayer(usernameToRemove);
+            }
+            else {
+                System.out.println("User does not exist");
             }
         }
     }

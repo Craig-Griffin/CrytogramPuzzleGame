@@ -1,11 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -31,10 +24,30 @@ public class Players {
 	/**
 	 * Remove a player from the system
 	 */
-	public void removePlayer(Player p) {
+	public void removePlayer(String username) throws IOException{
+		try {
+			File current = new File(FILE_ALLPLAYERS);
+			File temp = new File("temp.txt");
 
-		//Remove player from file
+			FileReader fr = new FileReader(current);
+			BufferedReader br = new BufferedReader(fr);
+			FileWriter fw = new FileWriter(temp);
+			BufferedWriter bw = new BufferedWriter(fw);
 
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (!(line.split(" ")[0].equals(username))) {
+					bw.write(line + System.getProperty("line.separator"));
+				}
+			}
+			temp.renameTo(current);
+			bw.close();
+			br.close();
+			temp.delete();
+		}
+		catch (IOException ex) {
+			System.out.println("Error writing to file");
+		}
 	}
 
 	/**
@@ -69,13 +82,7 @@ public class Players {
 
 		try {
 
-			File file = new File(FILE_ALLPLAYERS);
-
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-
-			FileWriter fr = new FileWriter(file, true);
+			FileWriter fr = new FileWriter(FILE_ALLPLAYERS, true);
 			BufferedWriter br = new BufferedWriter(fr);
 			PrintWriter pr = new PrintWriter(br);
 			pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
