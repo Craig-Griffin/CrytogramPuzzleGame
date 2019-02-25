@@ -13,7 +13,7 @@ public class Reference {
 
     private static HashSet<Character> populateAlphabet() {
         HashSet<Character> alphabet = new HashSet<>();
-        for(char c = 'a'; c <= 'z'; c++) {
+        for(char c = 'A'; c <= 'Z'; c++) {
             alphabet.add(c);
         }
         return alphabet;
