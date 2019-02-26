@@ -1,15 +1,29 @@
+
 import java.util.*;
+import java.io.*;
 
 public class Game {
-    private OneToOneMap<Character, Character> currentMapping;
-    private OneToOneMap<Character, Character> solutionMapping;
+
     private String crytogram;
+    private OneToOneMap<Character, Character> currentMapping;
+
+    private String solution;
+    private OneToOneMap<Character, Character> solutionMapping;
+
+
+    private final String FILE_QUOTES = "quotes.txt";
+
+
 
     public Game(Player player, MappingType type) {
         currentMapping = new OneToOneMap<>();
         solutionMapping = new OneToOneMap<>();
         generateCrypto();
     }
+
+    //For testing
+    public Game(){}
+
 
     public void mapLetter(char cipher, char mapping) {
         if (!Character.isAlphabetic(cipher)) {
@@ -58,6 +72,48 @@ public class Game {
 
     }
 
+
+    public String loadRandomQuote(){
+
+            String line = null;
+            ArrayList<String> quotes = new ArrayList<>();
+
+            try {
+
+                FileReader fileReader = new FileReader(FILE_QUOTES);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                while ((line = bufferedReader.readLine()) != null) {
+
+                    quotes.add(line);
+                }
+
+                bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                System.out.println("Unable to open file '" + FILE_QUOTES + "'");
+            } catch (IOException ex) {
+                System.out.println("Error reading file '" + FILE_QUOTES + "'");
+
+
+            }
+
+            int random = new Random().nextInt(quotes.size());
+            solution = quotes.get(random);
+
+            return quotes.get(random);
+
+        }
+
+    public String encryptQuote(){
+
+        //Assign a random letter of the alphabet 
+        int random = new Random().nextInt(25);
+
+
+        return crytogram;
+    }
+
+
     public void removeLetter() {
 
     }
@@ -75,6 +131,7 @@ public class Game {
     }
 
     private void generateCrypto() {
+
         ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
         ArrayList<Character> shuffled = new ArrayList<>(alphabet);
         Collections.shuffle(shuffled);
@@ -92,6 +149,13 @@ public class Game {
         unmapped.removeAll(currentMapping.keySet());
 
         return new ArrayList<>(unmapped);
+
+
+    }
+
+    private String getSolution(){
+        return solution;
+
     }
 
     enum MappingType {

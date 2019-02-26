@@ -12,11 +12,12 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        login();
+
+
+        Game test = new Game();
+        System.out.println(test.loadRandomQuote());
 
     }
-
-
 
 
     /* Some methods to help with the testing of player and players class. Probs can do these better */
