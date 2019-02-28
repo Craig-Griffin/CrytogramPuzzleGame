@@ -16,6 +16,8 @@ public class App {
       
     }
 
+    
+    /*
     public static String promptUser(String message) {
     	
         System.out.print(message);
@@ -133,5 +135,6 @@ public class App {
         return valid;
 
     }
+    */
 
 }

@@ -24,7 +24,7 @@ public class Players {
 	/**
 	 * Remove a player from the system
 	 */
-	public void removePlayer(String username) throws IOException{
+	public void removePlayer(Player p) throws IOException{
 		try {
 			File current = new File(FILE_ALLPLAYERS);
 			File temp = new File("temp.txt");
@@ -36,7 +36,7 @@ public class Players {
 
 			String line;
 			while ((line = br.readLine()) != null) {
-				if (!(line.split(" ")[0].equals(username))) {
+				if (!(line.split(" ")[0].equals(p.getUsername()))) {
 					bw.write(line + System.getProperty("line.separator"));
 				}
 			}
@@ -135,7 +135,7 @@ public class Players {
 	/**
 	 * Get the details of a player which will be used to generate an object
 	 */
-	public ArrayList<Integer> loadStatsFromFile(String p){
+	public ArrayList<Integer> loadStatsFromFile(Player p){
 
 		String line = null;
 		ArrayList<Integer> stats = new ArrayList<>();
@@ -150,7 +150,7 @@ public class Players {
 
 				String username = line.split(" ")[0];
 
-				if (username.equals(p)) {
+				if (username.equals(p.getUsername())) {
 
 					String numGame = line.split(" ")[1];
 					String numComp = line.split(" ")[2];

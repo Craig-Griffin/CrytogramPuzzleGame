@@ -32,9 +32,6 @@ public class Game {
 		encrpytQuote();
 		userInputQuote();
 
-		
-		System.out.println(getSolution());
-
 		while(!isComplete()) {
 
 			displaycryptOrSolution(getCrytogram());
@@ -66,6 +63,7 @@ public class Game {
 		userInputQuote();
 
 
+		//For testing purposes the solution will be written to the console
 		System.out.println(getSolution());
 
 		while(!isComplete()) {
@@ -95,12 +93,6 @@ public class Game {
 					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
 				}
 			}
-			
-			
-		
-			
-			
-
 		}
 		System.out.println("WINNER!!");
 
@@ -138,7 +130,15 @@ public class Game {
 		userInputQuote();
 	}
 	
+	/**
+	 * Method which will remove a letter from the current Mapping
+	 */
 	public void removeLetter(char cipher) {
+		if (!Character.isAlphabetic(cipher)) {
+			System.out.println("Error! " + cipher + " is not an alphabetic character!");
+			return;
+		}
+		
 		currentMapping.put(Character.toUpperCase(cipher), '#');
 		userInputQuote();
 
@@ -359,6 +359,7 @@ public class Game {
 		System.out.print(message);
 		Scanner sc = new Scanner(System.in);
 		Character c = sc.next(".").charAt(0);
+	
 		return c;
 	}
 
