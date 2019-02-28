@@ -14,26 +14,9 @@ public class App {
 
 
 
-        Game test = new Game();
-        
-   
-        test.encrpytString();
-        System.out.println("Solution: "+test.getSolution()+ "\n");
-        test.userInputString();
+        new Game();
+      
 
-        while(true) {
-        	test.display(test.getCrytogram(),test.getUserInput());
-        	
-        	Character one = promptForChar("\nEnter the letter you would like map\n=> ");
-        	Character two = promptForChar("Enter the letter you would like to map\n=> ");
-        	
-        	test.mapLetter(one,two);
-        	test.userInputString();
-        	
-        }
-        
-    
-       
 
     }
 
@@ -49,13 +32,7 @@ public class App {
         return store;
     }
     
-    public static Character promptForChar(String message) {
-
-        System.out.print(message);
-        Scanner sc = new Scanner(System.in);
-        Character c = sc.next(".").charAt(0);
-        return c;
-    }
+  
 
     public static void login() throws IOException {
 

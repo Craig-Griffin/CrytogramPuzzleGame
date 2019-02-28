@@ -12,39 +12,85 @@ public class Game {
 	private OneToOneMap<Character, Character> solutionMapping;
 
 
-
-
-
 	private final String FILE_QUOTES = "quotes.txt";
 
 
-
+	/**
+	 * Main Constructor for the Game. 
+	 * It will generate a new crytogram puzzle for a player to play.
+	 * @param player
+	 * @param type
+	 */
 	public Game(Player player, MappingType type) {
-		currentMapping = new OneToOneMap<>();
-		solutionMapping = new OneToOneMap<>();
 
-
-
-		generateCrypto();
-
-	}
-
-	//For testing
-	public Game(){
 		currentMapping = new OneToOneMap<>();
 		solutionMapping = new OneToOneMap<>();
 		crytogram = "";
 		userInput="";
 
-
-
-
 		generateCrypto();
+		encrpytQuote();
+		userInputQuote();
+
+		
+		System.out.println(getSolution());
+
+		while(!isComplete()) {
+
+			displaycryptOrSolution(getCrytogram());
+			displayUserInput(getUserInput());
+
+			Character one = promptForChar("\nEnter the letter you would like map\n=> ");
+			Character two = promptForChar("Enter the letter you would like to map\n=> ");
+
+			mapLetter(one,two);
+
+		}
+		System.out.println("WINNER!!");
 
 	}
 
+	/**
+	 * Test Constructor for the game.
+	 * Similar to main constructor except does not need a player parameter
+	 */
+	public Game(){
 
+		currentMapping = new OneToOneMap<>();
+		solutionMapping = new OneToOneMap<>();
+		crytogram = "";
+		userInput="";
+
+		generateCrypto();
+		encrpytQuote();
+		userInputQuote();
+
+
+		System.out.println(getSolution());
+
+		while(!isComplete()) {
+
+			displaycryptOrSolution(getCrytogram());
+			displayUserInput(getUserInput());
+
+			Character one = promptForChar("\nEnter the letter you would like map\n=> ");
+			Character two = promptForChar("Enter the letter you would like to map\n=> ");
+
+			mapLetter(one,two);
+
+		}
+		System.out.println("WINNER!!");
+
+	}
+
+	/**
+	 * Method which will check to make sure a user input is valad and then map it to the current Mapping Hash Map.
+	 * If an input is not valid an appropriate error message will be displayed
+	 * @param cipher
+	 * @param mapping
+	 */
 	public void mapLetter(char cipher, char mapping) {
+
 		if (!Character.isAlphabetic(cipher)) {
 			System.out.println("Error! " + cipher + " is not an alphabetic character!");
 			return;
@@ -66,32 +112,14 @@ public class Game {
 		}
 
 		currentMapping.put(Character.toUpperCase(cipher), Character.toUpperCase(mapping));
+		userInputQuote();
 	}
 
-	public void mapRandomLetter() {
-		ArrayList<Character> unmappedLetters = getUnmappedLetters();
-
-		if(unmappedLetters.size() == 2) {
-			mapLetter(unmappedLetters.get(0), unmappedLetters.get(1));
-
-		} else if(unmappedLetters.size() > 2) {
-			Random r = new Random();
-			int indexA = r.nextInt(unmappedLetters.size());
-			int indexB = r.nextInt(unmappedLetters.size());
-
-			while(indexA == indexB) {
-				indexB = r.nextInt();
-			}
-
-			mapLetter(unmappedLetters.get(indexA), unmappedLetters.get(indexB));
-
-		} else {
-			System.out.println("The mapping is super broken, it has 1 or fewer characters left in it.");
-		}
-
-	}
-
-
+	/**
+	 * Method which will open quotes file read in each line to an array list
+	 * A random quote will be selected from this array list and returned.
+	 * @return randomQuote
+	 */
 	public String loadRandomQuote(){
 
 		String line = null;
@@ -117,13 +145,208 @@ public class Game {
 		}
 
 		int random = new Random().nextInt(quotes.size());
+		String randomQuote = quotes.get(random).toUpperCase();
+
+		//Set the solution to the random selected Quote
 		solution = quotes.get(random).toUpperCase();
 
-		String test = quotes.get(random).toUpperCase();
-
-		return test;
+		return randomQuote;
 	}
 
+	/**
+	 * Method which will build the Solution Map and the Current Map
+	 * Solution Map will be assigned a random letter from the alphabet
+	 * Current Map will be assigned # as a place holder
+	 * Spaces and punctuation will be ingonred
+	 */
+	private void generateCrypto() {
+
+		loadRandomQuote();
+
+		ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
+		ArrayList<Character> shuffled = new ArrayList<>(alphabet);
+		Collections.shuffle(shuffled);
+
+		for(int i = 0; i < alphabet.size(); i++) {
+			solutionMapping.put(shuffled.get(i), alphabet.get(i));
+
+		}
+
+		for(int i = 0; i < alphabet.size(); i++) {
+			currentMapping.put(alphabet.get(i),'#');
+
+		}
+
+		//Map punctuation to avoid null pointer exceptions
+		solutionMapping.put(' ', ' ');
+		solutionMapping.put('.', '.');
+		solutionMapping.put(',', ',');
+		currentMapping.put(' ', ' ');
+		currentMapping.put('.', '.');
+		currentMapping.put(',', ',');
+
+	}
+
+	/**
+	 * Use the solution Mapping to get the letters that are relevant to the solution and 
+	 * store the random sequence of letters in the crytogram variable
+	 */
+	public void encrpytQuote() {
+
+		char[] quote = getSolution().toCharArray();
+
+		for(Character c: quote) {
+			crytogram= crytogram + solutionMapping.get(c);
+
+		}
+	}
+
+	/**
+	 * Method used to map out the correct number of characters for the quote
+	 * This method will be used to update the userInput String
+	 */
+	public void userInputQuote() {
+
+		char[] quote = getSolution().toCharArray();
+		userInput= "";
+
+		for(Character c: quote) {
+			userInput= userInput+ currentMapping.get(solutionMapping.get(c));
+		}
+	}
+
+	/**
+	 * Getter Method for crytogram
+	 * @return crytogram
+	 */
+	public String getCrytogram() {
+
+		return crytogram;
+	}
+
+	/**
+	 * Getter Method for userInput
+	 * @return userInput
+	 */
+	public String getUserInput() {
+
+		return userInput;
+	}
+
+	/**
+	 * Getter Method for solutionMapping.toString()
+	 * @return solutionMapping.toString()
+	 */
+	public String getSolutionMapping() {
+
+		return solutionMapping.toString();
+	}
+
+	/**
+	 * Getter Method for solution
+	 * @return solution
+	 */
+	public String getSolution() {
+
+		return solution;
+	}
+
+	/**
+	 * Getter Method for currentMapping.toString()
+	 * @return currentMapping.toString()
+	 */
+	public String getCurrentMapping() {
+
+		return currentMapping.toString();
+	}
+
+
+	/**
+	 * Method used to display either the crytogram or Solution
+	 * @param either a string containing a crytogram or the solution to the crytogram
+	 */
+	public void displaycryptOrSolution(String cryptOrSolution) {
+
+		StringBuilder displaycryptOrSolution = new StringBuilder();
+
+		for(int i=0; i<cryptOrSolution.length(); i++) {
+
+
+			if(cryptOrSolution.charAt(i) == '.' || cryptOrSolution.charAt(i) == ',') {
+				displaycryptOrSolution.append(cryptOrSolution.charAt(i));
+			}
+			else if(cryptOrSolution.charAt(i) == ' '){
+				displaycryptOrSolution.append("     ");
+			}
+			else {
+				displaycryptOrSolution.append("["+ cryptOrSolution.charAt(i) + "]");
+
+			}
+		}
+
+		System.out.println(displaycryptOrSolution.toString());
+	}
+
+	/**
+	 * Method used to display the users current mapping
+	 * Similar to the displaycryptOrSolution(String cryptOrSolution) except will handle characters with no mapping
+	 * @param userInput
+	 */
+	public void displayUserInput(String userInput) {
+
+		StringBuilder displayUserInput = new StringBuilder();
+
+
+		for(int i=0; i<userInput.length(); i++) {
+
+			if(userInput.charAt(i) == '.' || userInput.charAt(i) == ',') {
+				displayUserInput.append(userInput.charAt(i));
+
+			}
+
+			else if(userInput.charAt(i) == ' '){
+				displayUserInput.append("     ");
+			}
+			else {
+
+				if(userInput.charAt(i) == '#') {
+					displayUserInput.append("[ ]");
+				}
+				else {
+					displayUserInput.append("["+ userInput.charAt(i) + "]");
+				}
+			}
+		}
+		System.out.println(displayUserInput.toString());
+	}
+
+	/**
+	 * Helper Method used to get a character from the user.
+	 * @param message - A message to be passed into the method
+	 * @return c - the users input
+	 */
+	public Character promptForChar(String message) {
+
+		System.out.print(message);
+		Scanner sc = new Scanner(System.in);
+		Character c = sc.next(".").charAt(0);
+		return c;
+	}
+
+	/**
+	 * Helper Method to determine whether a game is finished or not
+	 */
+	public boolean isComplete() {
+		return solution.equals(userInput);
+
+
+	}
+
+
+	enum MappingType {
+		LETTERS,
+		NUMBERS;
+	}
 
 	public void removeLetter() {
 
@@ -141,143 +364,5 @@ public class Game {
 
 	}
 
-	private void generateCrypto() {
 
-		String phrase = loadRandomQuote();
-		ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
-		ArrayList<Character> shuffled = new ArrayList<>(alphabet);
-		Collections.shuffle(shuffled);
-
-		for(int i = 0; i < alphabet.size(); i++) {
-			solutionMapping.put(shuffled.get(i), alphabet.get(i));
-
-		}
-
-		for(int i = 0; i < alphabet.size(); i++) {
-			currentMapping.put(alphabet.get(i),'#');
-
-		}
-
-		solutionMapping.put(' ', ' ');
-		solutionMapping.put('.', '.');
-		solutionMapping.put(',', ',');
-
-		currentMapping.put(' ', ' ');
-		currentMapping.put('.', '.');
-		currentMapping.put(',', ',');
-
-
-
-	}
-
-	public void encrpytString() {
-
-		char[] test = getSolution().toCharArray();
-
-		for(Character c: test) {
-			crytogram= crytogram + solutionMapping.get(c);
-
-		}
-
-	}
-
-	public void userInputString() {
-
-		char[] test = getSolution().toCharArray();
-		userInput= "";
-
-		for(Character c: test) {
-			userInput= userInput+ currentMapping.get(c);
-
-		}
-		System.out.println(userInput);
-
-	}
-
-
-
-	private ArrayList<Character> getUnmappedLetters() {
-		HashSet<Character> unmapped = Reference.getAlphaSet();
-		unmapped.removeAll(currentMapping.keySet());
-
-
-
-		return new ArrayList<>(unmapped);
-
-
-	}
-
-	public String getSolution() {
-		return solution;
-	}
-
-	public String getCurrentMapping() {
-		return currentMapping.toString();
-	}
-
-
-
-
-	public void display(String cryptOrSolution, String userInput) {
-
-
-		StringBuilder displaycryptOrSolution = new StringBuilder();
-		StringBuilder displayUserInput = new StringBuilder();
-
-
-		for(int i=0; i<cryptOrSolution.length(); i++) {
-
-
-			if(cryptOrSolution.charAt(i) == '.' || cryptOrSolution.charAt(i) == ',') {
-				displaycryptOrSolution.append(cryptOrSolution.charAt(i));
-				displayUserInput.append(cryptOrSolution.charAt(i));
-
-			}
-
-			else if(cryptOrSolution.charAt(i) == ' '){
-				displaycryptOrSolution.append("     ");
-				displayUserInput.append("     ");
-
-
-			}
-			else {
-				displaycryptOrSolution.append("["+ cryptOrSolution.charAt(i) + "]");
-
-
-				if(userInput.charAt(i) == '#') {
-					displayUserInput.append("[ ]");
-
-				}
-				else {
-					displayUserInput.append("["+ userInput.charAt(i) + "]");
-				}
-
-			}
-
-		}
-
-		System.out.println(displaycryptOrSolution.toString());
-		System.out.println(displayUserInput.toString());
-
-
-	}
-
-
-
-	enum MappingType {
-		LETTERS,
-		NUMBERS;
-	}
-
-
-
-	public String getCrytogram() {
-		// TODO Auto-generated method stub
-		return crytogram;
-	}
-
-	public String getUserInput() {
-		// TODO Auto-generated method stub
-		return userInput;
-	}
 }
