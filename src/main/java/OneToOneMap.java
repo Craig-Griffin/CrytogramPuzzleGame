@@ -15,7 +15,8 @@ import java.util.Set;
  * @param <V> Arbitrary type.
  */
 public class OneToOneMap<K, V> extends HashMap<K, V> {
-    private HashMap<V, K> reverseMap;
+   
+	private HashMap<V, K> reverseMap;
 
     /**
      * Default constructor
@@ -50,7 +51,7 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
      */
     @Override
     public V put(K k, V v) {
-        if (reverseMap.containsKey(v)) {
+        if (reverseMap.containsKey(v) && !v.equals(' ')&& !v.equals('.')&& !v.equals(',')&& !v.equals('#')) {
             System.out.println(v + " is already mapped to " + reverseMap.get(v));
             return null;
 
@@ -88,5 +89,6 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
         super.replace(k, newV);
         return newV;
     }
+
 
 }
