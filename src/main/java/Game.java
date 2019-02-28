@@ -72,11 +72,34 @@ public class Game {
 
 			displaycryptOrSolution(getCrytogram());
 			displayUserInput(getUserInput());
+			
+			boolean validUserPlay = false;
+			
+			Character userPlay = promptForChar("\nTo enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
+			
+			while(!validUserPlay) {
+				
+				if(userPlay.equals('e') ||userPlay.equals('E')) {
+					Character one = promptForChar("\nEnter the letter you would like map\n=> ");
+					Character two = promptForChar("Enter the letter you would like to map\n=> ");
 
-			Character one = promptForChar("\nEnter the letter you would like map\n=> ");
-			Character two = promptForChar("Enter the letter you would like to map\n=> ");
-
-			mapLetter(one,two);
+					mapLetter(one,two);
+					validUserPlay = true;
+				}
+				else if(userPlay.equals('r') ||userPlay.equals('r')) {
+					Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
+					removeLetter(one);
+					validUserPlay = true;
+				}
+				else {
+					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
+				}
+			}
+			
+			
+		
+			
+			
 
 		}
 		System.out.println("WINNER!!");
@@ -113,6 +136,12 @@ public class Game {
 
 		currentMapping.put(Character.toUpperCase(cipher), Character.toUpperCase(mapping));
 		userInputQuote();
+	}
+	
+	public void removeLetter(char cipher) {
+		currentMapping.put(Character.toUpperCase(cipher), '#');
+		userInputQuote();
+
 	}
 
 	/**
@@ -344,10 +373,6 @@ public class Game {
 	enum MappingType {
 		LETTERS,
 		NUMBERS;
-	}
-
-	public void removeLetter() {
-
 	}
 
 	public void saveToDisk() {
