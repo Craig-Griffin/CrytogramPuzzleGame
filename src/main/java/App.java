@@ -11,20 +11,13 @@ public class App {
     /*MAIN GAME LOOP*/
 
     public static void main(String[] args) throws IOException {
-
-
-
+    	
         new Game();
       
-
-
     }
 
-
-    /* Some methods to help with the testing of player and players class. Probs can do these better */
-
     public static String promptUser(String message) {
-
+    	
         System.out.print(message);
         Scanner sc = new Scanner(System.in);
         String store = sc.nextLine();
@@ -32,7 +25,7 @@ public class App {
         return store;
     }
     
-  
+
 
     public static void login() throws IOException {
 

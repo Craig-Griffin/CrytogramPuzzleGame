@@ -338,8 +338,6 @@ public class Game {
 	 */
 	public boolean isComplete() {
 		return solution.equals(userInput);
-
-
 	}
 
 
