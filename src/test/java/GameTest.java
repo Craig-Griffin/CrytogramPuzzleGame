@@ -1,37 +1,50 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Assert;
+
 class GameTest {
-    private Game game;
 
-    @BeforeEach
-    void setUp() {
-        game = new Game(null, null);
-    }
 
-    @Test
-    void mapLetter() {
-    }
+	/**
+	 * This will test 
+	 */
+	@Test
+	void makeSureAnEmptyUserStringOnlyContainsHashTagsForLetters() {
+		Game game = new Game();
+		char[] userInput = game.getUserInput().toCharArray();
 
-    @Test
-    void mapRandomLetter() {
-    }
+		for(char c: userInput) {
+			Assert.assertTrue(c=='#' || c== ' ' || c=='.' || c==',');
+		}	
+	}
 
-    @Test
-    void removeLetter() {
-    }
 
-    @Test
-    void saveToDisk() {
-    }
+	/**
+	 * Make sure that the random letter mapping is working.
+	 */
+	@Test
+	void makeSureSolutionAndCrytogramAreNotTheSame() {
+		Game game = new Game();
+		Assert.assertTrue(!game.getCrytogram().equals(game.getSolution()) );
+	}
 
-    @Test
-    void autocomplete() {
-    }
+	@Test
+	void removeLetter() {
+	}
 
-    @Test
-    void getFrequencies() {
-    }
+	@Test
+	void saveToDisk() {
+	}
+
+	@Test
+	void autocomplete() {
+	}
+
+	@Test
+	void getFrequencies() {
+	}
 }

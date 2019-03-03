@@ -1,19 +1,23 @@
 import java.io.*;
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 public class App {
 
     private final static String FILENAME = "allplayers.txt";
+  
 
 
     /*MAIN GAME LOOP*/
 
     public static void main(String[] args) throws IOException {
     	
-        new Game();
+    	
+    	Player bob = new Player("bob");
+    	
+    	new Game(bob, MappingType.LETTERS );
       
+    	
     }
 
     

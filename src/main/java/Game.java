@@ -6,13 +6,20 @@ public class Game {
 
 	private String crytogram;
 	private String userInput;
-	private OneToOneMap<Character, Character> currentMapping;
-
 	private String solution;
+
+	//For Letters Mapping
+	private OneToOneMap<Character, Character> currentMapping;
 	private OneToOneMap<Character, Character> solutionMapping;
+
+	//For Numbers Mapping
+	private OneToOneMap<Character, Integer> currentMappingForNums;
+	private OneToOneMap<Character, Integer> solutionMappingForNums;
 
 
 	private final String FILE_QUOTES = "quotes.txt";
+	
+	private MappingType lettersOrNums;
 
 
 	/**
@@ -22,6 +29,8 @@ public class Game {
 	 * @param type
 	 */
 	public Game(Player player, MappingType type) {
+		
+		lettersOrNums = type;
 
 		currentMapping = new OneToOneMap<>();
 		solutionMapping = new OneToOneMap<>();
@@ -32,18 +41,18 @@ public class Game {
 		encrpytQuote();
 		userInputQuote();
 
-		while(!isComplete()) {
+		System.out.println("***Sprint One Console Print Out***");
+		
+		//Phrase Being Used
+		System.out.println(getSolution());
+		
+		//cryptographic alphabet
+		System.out.println(getCrytogram());
+		
+		//how it is mapped to the plain alphabet (A-Z)
+		System.out.println(getSolutionMapping()+"\n\n");
 
-			displaycryptOrSolution(getCrytogram());
-			displayUserInput(getUserInput());
-
-			Character one = promptForChar("\nEnter the letter you would like map\n=> ");
-			Character two = promptForChar("Enter the letter you would like to map\n=> ");
-
-			mapLetter(one,two);
-
-		}
-		System.out.println("WINNER!!");
+		playGame();
 
 	}
 
@@ -65,36 +74,12 @@ public class Game {
 
 		//For testing purposes the solution will be written to the console
 		System.out.println(getSolution());
+		System.out.println(getCrytogram());
+		System.out.println(getUserInput());
 
-		while(!isComplete()) {
+		//playGame();
 
-			displaycryptOrSolution(getCrytogram());
-			displayUserInput(getUserInput());
-			
-			boolean validUserPlay = false;
-			
-			Character userPlay = promptForChar("\nTo enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
-			
-			while(!validUserPlay) {
-				
-				if(userPlay.equals('e') ||userPlay.equals('E')) {
-					Character one = promptForChar("\nEnter the letter you would like map\n=> ");
-					Character two = promptForChar("Enter the letter you would like to map\n=> ");
 
-					mapLetter(one,two);
-					validUserPlay = true;
-				}
-				else if(userPlay.equals('r') ||userPlay.equals('r')) {
-					Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
-					removeLetter(one);
-					validUserPlay = true;
-				}
-				else {
-					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
-				}
-			}
-		}
-		System.out.println("WINNER!!");
 
 	}
 
@@ -129,7 +114,7 @@ public class Game {
 		currentMapping.put(Character.toUpperCase(cipher), Character.toUpperCase(mapping));
 		userInputQuote();
 	}
-	
+
 	/**
 	 * Method which will remove a letter from the current Mapping
 	 */
@@ -138,7 +123,7 @@ public class Game {
 			System.out.println("Error! " + cipher + " is not an alphabetic character!");
 			return;
 		}
-		
+
 		currentMapping.put(Character.toUpperCase(cipher), '#');
 		userInputQuote();
 
@@ -359,7 +344,7 @@ public class Game {
 		System.out.print(message);
 		Scanner sc = new Scanner(System.in);
 		Character c = sc.next(".").charAt(0);
-	
+
 		return c;
 	}
 
@@ -370,11 +355,77 @@ public class Game {
 		return solution.equals(userInput);
 	}
 
+	/**
+	 * Game Loop
+	 */
+	public void playGame() {
 
-	enum MappingType {
-		LETTERS,
-		NUMBERS;
+		while(!isComplete()) {
+
+			displaycryptOrSolution(getCrytogram());
+			displayUserInput(getUserInput());
+
+			boolean validUserPlay = false;
+
+			Character userPlay = promptForChar("\n**User Options**\n"
+					+ "To enter a letter into the Puzzle enter      <e>\n"
+					+"To remove a letter from the puzzle enter     <r>\n"
+					+ "To get a hint enter                          <h>\n"
+					+ "To get the frequencys of each letter enter   <f>\n"
+					+ "To save your progress in this puzzle enter   <s>\n"
+					+ "=>");
+
+			while(!validUserPlay) {
+
+				//Enter a Letter
+				if(userPlay.equals('e') ||userPlay.equals('E')) {
+					Character one = promptForChar("\nEnter the letter you would like map\n=> ");
+					Character two = promptForChar("Enter the letter you would like to map\n=> ");
+
+					mapLetter(one,two);
+					validUserPlay = true;
+				}
+
+				//Remove a Letter
+				else if(userPlay.equals('r') ||userPlay.equals('R')) {
+					Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
+					removeLetter(one);
+					validUserPlay = true;
+				}
+
+				//Get a Hint
+				else if(userPlay.equals('h') ||userPlay.equals('H')) {
+					System.out.println("\nhint\n");
+					validUserPlay = true;
+				}
+
+				//Get frequency for each letter
+				else if(userPlay.equals('f') ||userPlay.equals('F')) {
+					getFrequencies();
+					validUserPlay = true;
+				}
+
+				//Save Game
+				else if(userPlay.equals('s') ||userPlay.equals('S')) {
+					System.out.println("\nsave\n");
+					validUserPlay = true;
+				}
+
+				//Letter that doesnt do anything
+				else {
+					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
+				}
+			}
+
+			//Clear the terminal to improve the visuals -- still needs some work
+			//clearScreen();
+
+
+		}
+		System.out.println("WINNER!!");
 	}
+
+
 
 	public void saveToDisk() {
 
@@ -384,9 +435,40 @@ public class Game {
 
 	}
 
+	//Not Working
 	public void getFrequencies() {
+		String cryto = getCrytogram();
+		ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
+		HashMap<Character,Integer> temp = new HashMap<>();
+		Integer oldvalue;
+		Integer newValue;
+		
+		for(int i = 0; i < alphabet.size(); i++) {
+			temp.put(alphabet.get(i),0);
+
+		}
+		
+		System.out.println(temp);
+		
+		for(Character current: cryto.toCharArray()) {
+			for(Character c: cryto.toCharArray()) {
+				if(current.equals(c)) {
+					oldvalue =  temp.get(c);
+					newValue = oldvalue + 1;
+					
+					temp.replace(c, newValue);
+				}		
+			}
+		}
+		
 
 	}
+
+	//Working but only on UNIX terminal so find something better
+	public void clearScreen() {  
+		System.out.print("\033[H\033[2J");  
+		System.out.flush();  
+	} 
 
 
 }
