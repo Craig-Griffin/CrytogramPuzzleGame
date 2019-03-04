@@ -51,8 +51,12 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
      */
     @Override
     public V put(K k, V v) {
-        if (reverseMap.containsKey(v) && !v.equals(' ')&& !v.equals('.')&& !v.equals(',')&& !v.equals('#')) {
+        if (reverseMap.containsKey(v) && !v.equals(' ')&& !v.equals('.')&& !v.equals(',')&& !v.equals('#') && !v.equals('\'')) {
             System.out.println(v + " is already mapped to " + reverseMap.get(v));
+            return null;
+
+        } else if (this.containsKey(k) && !this.get(k).equals('#')) {
+            System.out.println(k + " already has mapping " + this.get(k));
             return null;
 
         } else {

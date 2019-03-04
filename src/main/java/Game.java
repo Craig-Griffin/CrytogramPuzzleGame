@@ -91,6 +91,7 @@ public class Game {
 	 */
 	public void mapLetter(char cipher, char mapping) {
 
+
 		if (!Character.isAlphabetic(cipher)) {
 			System.out.println("Error! " + cipher + " is not an alphabetic character!");
 			return;
@@ -123,7 +124,7 @@ public class Game {
 			System.out.println("Error! " + cipher + " is not an alphabetic character!");
 			return;
 		}
-
+        currentMapping.remove(Character.toUpperCase(cipher));
 		currentMapping.put(Character.toUpperCase(cipher), '#');
 		userInputQuote();
 
@@ -195,9 +196,11 @@ public class Game {
 		solutionMapping.put(' ', ' ');
 		solutionMapping.put('.', '.');
 		solutionMapping.put(',', ',');
+		solutionMapping.put('\'', '\'');
 		currentMapping.put(' ', ' ');
 		currentMapping.put('.', '.');
 		currentMapping.put(',', ',');
+		currentMapping.put('\'', '\'');
 
 	}
 
@@ -225,7 +228,7 @@ public class Game {
 		userInput= "";
 
 		for(Character c: quote) {
-			userInput= userInput+ currentMapping.get(solutionMapping.get(c));
+			userInput= userInput + currentMapping.get(solutionMapping.get(c));
 		}
 	}
 
@@ -277,7 +280,7 @@ public class Game {
 
 	/**
 	 * Method used to display either the crytogram or Solution
-	 * @param either a string containing a crytogram or the solution to the crytogram
+	 * @param cryptOrSolution either a string containing a crytogram or the solution to the crytogram
 	 */
 	public void displaycryptOrSolution(String cryptOrSolution) {
 
@@ -313,7 +316,7 @@ public class Game {
 
 		for(int i=0; i<userInput.length(); i++) {
 
-			if(userInput.charAt(i) == '.' || userInput.charAt(i) == ',') {
+			if(userInput.charAt(i) == '.' || userInput.charAt(i) == ',' || userInput.charAt(i) == '\'') {
 				displayUserInput.append(userInput.charAt(i));
 
 			}
@@ -343,7 +346,7 @@ public class Game {
 
 		System.out.print(message);
 		Scanner sc = new Scanner(System.in);
-		Character c = sc.next(".").charAt(0);
+		Character c = sc.next().charAt(0);
 
 		return c;
 	}
@@ -413,7 +416,7 @@ public class Game {
 
 				//Letter that doesnt do anything
 				else {
-					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>");
+					userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>\n=>");
 				}
 			}
 
