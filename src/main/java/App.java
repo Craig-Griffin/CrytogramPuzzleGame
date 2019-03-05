@@ -1,23 +1,20 @@
 import java.io.*;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class App {
 
     private final static String FILENAME = "allplayers.txt";
-  
-
-
-    /*MAIN GAME LOOP*/
 
     public static void main(String[] args) throws IOException {
-    	
-    	
-    	Player bob = new Player("bob");
-    	
-    	new Game(bob, MappingType.LETTERS );
-      
-    	
+        Player bob = new Player("bob");
+        Cryptogram crypto = new Cryptogram(Cryptogram.getQuoteFromFile(FILENAME), Cryptogram.generateRandomMapping());
+
+    	GameView view = new GameView();
+    	Game model = new Game(bob, MappingType.LETTERS, crypto);
+
+        GameController controller = new GameController(model, view);
+
+        controller.playGame();
+
     }
 
     
