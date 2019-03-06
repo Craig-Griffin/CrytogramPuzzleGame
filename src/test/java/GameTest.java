@@ -9,7 +9,7 @@ class GameTest {
 	 */
 	@Test
 	void makeSureAnEmptyUserStringOnlyContainsHashTagsForLetters() {
-		Game game = new Game();
+		GameModel game = new GameModel(MappingType.LETTERS);
 		char[] userInput = game.getUserInput().toCharArray();
 
 		for(char c: userInput) {
@@ -23,7 +23,7 @@ class GameTest {
 	 */
 	@Test
 	void makeSureSolutionAndCrytogramAreNotTheSame() {
-		Game game = new Game();
+		GameModel game = new GameModel(MappingType.LETTERS);
 		Assert.assertTrue(!game.getCrytogram().equals(game.getSolution()) );
 	}
 

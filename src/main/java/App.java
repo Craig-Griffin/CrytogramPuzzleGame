@@ -14,9 +14,11 @@ public class App {
     	
     	
     	Player bob = new Player("bob");
-    	
-    	new Game(bob, MappingType.LETTERS );
-      
+    	GameController game = new GameController(MappingType.LETTERS,bob);
+
+
+
+    	game.playGame();
     	
     }
 
