@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="49a24e22-b74a-4e26-8b4d-dad86b649450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cryptogram.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cryptogram.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cryptogram/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cryptogram/OneToOneMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/cryptogram/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/cryptogram/GameTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/quotes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cryptogram/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cryptogram/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cryptogram/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cryptogram/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OneToOneMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OneToOneMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,74 +69,63 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-2052565338">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="653" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="653" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+            <state relative-caret-position="285">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="352" lean-forward="true" selection-start-line="352" selection-end-line="352" />
+            <state relative-caret-position="304">
+              <caret line="452" column="9" selection-start-line="452" selection-start-column="9" selection-end-line="452" selection-end-column="9" />
               <folding>
-                <element signature="docComment;method#Game#0;class#Game#0" />
-                <element signature="method#Game#0;class#Game#0" />
-                <element signature="docComment;method#Game#1;class#Game#0" />
-                <element signature="method#Game#1;class#Game#0" />
-                <element signature="docComment;method#mapLetter#0;class#Game#0" />
-                <element signature="docComment;method#removeLetter#0;class#Game#0" />
-                <element signature="docComment;method#loadRandomQuote#0;class#Game#0" />
-                <element signature="method#loadRandomQuote#0;class#Game#0" />
-                <element signature="docComment;method#encrpytQuote#0;class#Game#0" />
-                <element signature="method#encrpytQuote#0;class#Game#0" />
-                <element signature="docComment;method#userInputQuote#0;class#Game#0" />
-                <element signature="method#userInputQuote#0;class#Game#0" />
-                <element signature="docComment;method#getCrytogram#0;class#Game#0" />
-                <element signature="method#getCrytogram#0;class#Game#0" />
-                <element signature="docComment;method#getUserInput#0;class#Game#0" />
-                <element signature="method#getUserInput#0;class#Game#0" />
-                <element signature="docComment;method#getSolutionMapping#0;class#Game#0" />
-                <element signature="method#getSolutionMapping#0;class#Game#0" />
-                <element signature="docComment;method#getSolution#0;class#Game#0" />
-                <element signature="method#getSolution#0;class#Game#0" />
-                <element signature="docComment;method#getCurrentMapping#0;class#Game#0" />
-                <element signature="method#getCurrentMapping#0;class#Game#0" />
-                <element signature="docComment;method#displaycryptOrSolution#0;class#Game#0" />
-                <element signature="method#displaycryptOrSolution#0;class#Game#0" />
-                <element signature="docComment;method#displayUserInput#0;class#Game#0" />
-                <element signature="method#displayUserInput#0;class#Game#0" />
-                <element signature="docComment;method#promptForChar#0;class#Game#0" />
-                <element signature="docComment;method#isComplete#0;class#Game#0" />
-                <element signature="e#8463#8464#0" expanded="true" />
-                <element signature="e#8503#8504#0" expanded="true" />
-                <element signature="docComment;method#playGame#0;class#Game#0" />
-                <element signature="method#saveToDisk#0;class#Game#0" />
-                <element signature="method#autocomplete#0;class#Game#0" />
-                <element signature="method#getFrequencies#0;class#Game#0" />
-                <element signature="method#clearScreen#0;class#Game#0" />
+                <element signature="e#8521#8522#0" expanded="true" />
+                <element signature="e#8561#8562#0" expanded="true" />
+                <element signature="e#11062#11063#0" expanded="true" />
+                <element signature="e#11089#11090#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quotes.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/OneToOneMap.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/GameTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="63" column="28" lean-forward="true" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+            <state relative-caret-position="30">
+              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,6 +139,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="refactor" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -186,7 +175,6 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,21 +202,13 @@
             </path>
             <path>
               <item name="cryptogram" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cryptogram" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cryptogram" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cryptogram" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,7 +217,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551697550741" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551890515372" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -277,6 +257,8 @@
       <list>
         <item itemvalue="Application.App" />
         <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.GameTest" />
       </list>
     </recent_temporary>
   </component>
@@ -306,13 +288,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6934000" />
+    <option name="totallyTimeSpent" value="10290000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <frame x="67" y="25" width="1373" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10680686" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532027" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -321,7 +303,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32216215" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3986577" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -356,68 +338,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/GameTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jrt:///usr/lib/jvm/java-1.11.0-openjdk-amd64!/java.base/java/util/HashMap.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1529">
           <caret line="190" column="12" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="12" />
-          <folding>
-            <element signature="e#5857#5858#0" expanded="true" />
-            <element signature="e#5927#5928#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="352" lean-forward="true" selection-start-line="352" selection-end-line="352" />
-          <folding>
-            <element signature="docComment;method#Game#0;class#Game#0" />
-            <element signature="method#Game#0;class#Game#0" />
-            <element signature="docComment;method#Game#1;class#Game#0" />
-            <element signature="method#Game#1;class#Game#0" />
-            <element signature="docComment;method#mapLetter#0;class#Game#0" />
-            <element signature="docComment;method#removeLetter#0;class#Game#0" />
-            <element signature="docComment;method#loadRandomQuote#0;class#Game#0" />
-            <element signature="method#loadRandomQuote#0;class#Game#0" />
-            <element signature="docComment;method#encrpytQuote#0;class#Game#0" />
-            <element signature="method#encrpytQuote#0;class#Game#0" />
-            <element signature="docComment;method#userInputQuote#0;class#Game#0" />
-            <element signature="method#userInputQuote#0;class#Game#0" />
-            <element signature="docComment;method#getCrytogram#0;class#Game#0" />
-            <element signature="method#getCrytogram#0;class#Game#0" />
-            <element signature="docComment;method#getUserInput#0;class#Game#0" />
-            <element signature="method#getUserInput#0;class#Game#0" />
-            <element signature="docComment;method#getSolutionMapping#0;class#Game#0" />
-            <element signature="method#getSolutionMapping#0;class#Game#0" />
-            <element signature="docComment;method#getSolution#0;class#Game#0" />
-            <element signature="method#getSolution#0;class#Game#0" />
-            <element signature="docComment;method#getCurrentMapping#0;class#Game#0" />
-            <element signature="method#getCurrentMapping#0;class#Game#0" />
-            <element signature="docComment;method#displaycryptOrSolution#0;class#Game#0" />
-            <element signature="method#displaycryptOrSolution#0;class#Game#0" />
-            <element signature="docComment;method#displayUserInput#0;class#Game#0" />
-            <element signature="method#displayUserInput#0;class#Game#0" />
-            <element signature="docComment;method#promptForChar#0;class#Game#0" />
-            <element signature="docComment;method#isComplete#0;class#Game#0" />
-            <element signature="e#8463#8464#0" expanded="true" />
-            <element signature="e#8503#8504#0" expanded="true" />
-            <element signature="docComment;method#playGame#0;class#Game#0" />
-            <element signature="method#saveToDisk#0;class#Game#0" />
-            <element signature="method#autocomplete#0;class#Game#0" />
-            <element signature="method#getFrequencies#0;class#Game#0" />
-            <element signature="method#clearScreen#0;class#Game#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -433,8 +357,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="285">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/GameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="452" column="9" selection-start-line="452" selection-start-column="9" selection-end-line="452" selection-end-column="9" />
+          <folding>
+            <element signature="e#8521#8522#0" expanded="true" />
+            <element signature="e#8561#8562#0" expanded="true" />
+            <element signature="e#11062#11063#0" expanded="true" />
+            <element signature="e#11089#11090#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

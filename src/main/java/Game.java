@@ -8,6 +8,9 @@ public class Game {
 	private String userInput;
 	private String solution;
 
+
+	private int hintCount;
+
 	//For Letters Mapping
 	private OneToOneMap<Character, Character> currentMapping;
 	private OneToOneMap<Character, Character> solutionMapping;
@@ -36,6 +39,8 @@ public class Game {
 		solutionMapping = new OneToOneMap<>();
 		crytogram = "";
 		userInput="";
+
+		hintCount=0;
 
 		generateCrypto();
 		encrpytQuote();
@@ -363,6 +368,8 @@ public class Game {
 	 */
 	public void playGame() {
 
+		boolean giveup =  false;
+
 		while(!isComplete()) {
 
 			displaycryptOrSolution(getCrytogram());
@@ -372,10 +379,11 @@ public class Game {
 
 			Character userPlay = promptForChar("\n**User Options**\n"
 					+ "To enter a letter into the Puzzle enter      <e>\n"
-					+"To remove a letter from the puzzle enter     <r>\n"
+					+ "To remove a letter from the puzzle enter     <r>\n"
 					+ "To get a hint enter                          <h>\n"
 					+ "To get the frequencys of each letter enter   <f>\n"
 					+ "To save your progress in this puzzle enter   <s>\n"
+					+ "To Give up enter                             <g>\n"
 					+ "=>");
 
 			while(!validUserPlay) {
@@ -399,6 +407,8 @@ public class Game {
 				//Get a Hint
 				else if(userPlay.equals('h') ||userPlay.equals('H')) {
 					System.out.println("\nhint\n");
+
+					giveHint();
 					validUserPlay = true;
 				}
 
@@ -411,7 +421,16 @@ public class Game {
 				//Save Game
 				else if(userPlay.equals('s') ||userPlay.equals('S')) {
 					System.out.println("\nsave\n");
+					autocomplete();
 					validUserPlay = true;
+				}
+
+				//Give up
+				else if(userPlay.equals('g') ||userPlay.equals('G')) {
+					System.out.println("\nsave\n");
+					autocomplete();
+					validUserPlay = true;
+					giveup = true;
 				}
 
 				//Letter that doesnt do anything
@@ -425,7 +444,15 @@ public class Game {
 
 
 		}
-		System.out.println("WINNER!!");
+
+		if(giveup){
+			System.out.println("FAIL!!\n");
+		}
+		else {
+			System.out.println("WINNER!!\n");
+		}
+		displaycryptOrSolution(getCrytogram());
+		displaycryptOrSolution(getSolution());
 	}
 
 
@@ -435,6 +462,22 @@ public class Game {
 	}
 
 	public void autocomplete() {
+		userInput = solution;
+	}
+
+	public void giveHint(){
+
+		char[] quote = getSolution().toCharArray();
+
+		for(int i=hintCount; i<quote.length; i++) {
+				Character c = quote[i];
+				hintCount++;
+				if(!c.equals( currentMapping.get(c))){
+					currentMapping.put(solutionMapping.get(c),c);
+					userInputQuote();
+					break;
+				}
+		}
 
 	}
 
