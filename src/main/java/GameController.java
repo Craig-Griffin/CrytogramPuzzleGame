@@ -58,7 +58,6 @@ public class GameController {
 
                 //Get a Hint
                 else if (userPlay.equals('h') || userPlay.equals('H')) {
-                    System.out.println("\nhint\n");
 
                     model.giveHint();
                     validUserPlay = true;

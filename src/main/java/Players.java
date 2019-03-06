@@ -24,7 +24,7 @@ public class Players {
 	/**
 	 * Remove a player from the system
 	 */
-	public void removePlayer(Player p) throws IOException{
+	public void removePlayer(String p) throws IOException{
 		try {
 			File current = new File(FILE_ALLPLAYERS);
 			File temp = new File("temp.txt");
@@ -36,7 +36,7 @@ public class Players {
 
 			String line;
 			while ((line = br.readLine()) != null) {
-				if (!(line.split(" ")[0].equals(p.getUsername()))) {
+				if (!(line.split(" ")[0].equals(p))) {
 					bw.write(line + System.getProperty("line.separator"));
 				}
 			}

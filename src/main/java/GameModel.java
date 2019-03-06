@@ -134,6 +134,8 @@ public class GameModel {
 				}
 		}
 
+		System.out.println("\nHint Number: "+ hintCount+"\n");
+
 	}
 
 
