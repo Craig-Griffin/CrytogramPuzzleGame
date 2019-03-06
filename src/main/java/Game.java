@@ -294,7 +294,7 @@ public class Game {
 		for(int i=0; i<cryptOrSolution.length(); i++) {
 
 
-			if(cryptOrSolution.charAt(i) == '.' || cryptOrSolution.charAt(i) == ',') {
+			if(cryptOrSolution.charAt(i) == '.' || cryptOrSolution.charAt(i) == ','|| cryptOrSolution.charAt(i) == '\'') {
 				displaycryptOrSolution.append(cryptOrSolution.charAt(i));
 			}
 			else if(cryptOrSolution.charAt(i) == ' '){
@@ -484,30 +484,38 @@ public class Game {
 	//Not Working
 	public void getFrequencies() {
 		String cryto = getCrytogram();
-		ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
 		HashMap<Character,Integer> temp = new HashMap<>();
-		Integer oldvalue;
-		Integer newValue;
 		
-		for(int i = 0; i < alphabet.size(); i++) {
-			temp.put(alphabet.get(i),0);
-
+		for(Character c: cryto.toCharArray()) {
+			
+			if(c != ' ' && c != '.'&&c != ',') {
+				int currentCount = countChar(cryto, c);
+				temp.put(c, currentCount);
+		
+		}
 		}
 		
-		System.out.println(temp);
-		
-		for(Character current: cryto.toCharArray()) {
-			for(Character c: cryto.toCharArray()) {
-				if(current.equals(c)) {
-					oldvalue =  temp.get(c);
-					newValue = oldvalue + 1;
-					
-					temp.replace(c, newValue);
-				}		
-			}
-		}
+		System.out.println("\nLetter Frequencies: "+ temp.toString()+"\n");
 		
 
+	}
+	
+	/**
+	 * Helper Method for counting letter frequencies
+	 * @param str
+	 * @param c
+	 * @return count
+	 */
+	public int countChar(String str, char c)
+	{
+	    int count = 0;
+
+	    for(int i=0; i < str.length(); i++)
+	    {    if(str.charAt(i) == c)
+	            count++;
+	    }
+
+	    return count;
 	}
 
 	//Working but only on UNIX terminal so find something better
