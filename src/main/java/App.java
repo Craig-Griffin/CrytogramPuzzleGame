@@ -13,10 +13,9 @@ public class App {
     public static void main(String[] args) throws IOException {
 
 
-        PlayerController login = new PlayerController();
+        PlayerController playerController = new PlayerController();
     	
-    	Player player = login.login();
-
+    	Player player = playerController.login();
 
     	GameController game = new GameController(MappingType.LETTERS, player);
 

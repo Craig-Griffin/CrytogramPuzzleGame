@@ -135,7 +135,7 @@ public class Players {
 	/**
 	 * Get the details of a player which will be used to generate an object
 	 */
-	public ArrayList<Integer> loadStatsFromFile(Player p){
+	public ArrayList<Integer> loadStatsFromFile(String p){
 
 		String line = null;
 		ArrayList<Integer> stats = new ArrayList<>();
@@ -150,7 +150,7 @@ public class Players {
 
 				String username = line.split(" ")[0];
 
-				if (username.equals(p.getUsername())) {
+				if (username.equals(p)) {
 
 					String numGame = line.split(" ")[1];
 					String numComp = line.split(" ")[2];

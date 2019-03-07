@@ -5,12 +5,14 @@ public class GameController {
     private GameModel model;
     private GameView display;
     private GenerateCrypto crypto;
+    private Player currentPlayer;
 
 
     public GameController(MappingType type, Player p){
 
         display = new GameView();
         model = new GameModel(type);
+        currentPlayer = p;
 
     }
 
@@ -47,6 +49,7 @@ public class GameController {
 
                     model.mapLetter(one, two);
                     validUserPlay = true;
+                    currentPlayer.incrementGuesses();
                 }
 
                 //Remove a Letter
@@ -54,6 +57,7 @@ public class GameController {
                     Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
                     model.removeLetter(one);
                     validUserPlay = true;
+                    currentPlayer.incrementGuesses();
                 }
 
                 //Get a Hint
@@ -61,6 +65,7 @@ public class GameController {
 
                     model.giveHint();
                     validUserPlay = true;
+                    currentPlayer.incrementGuesses();
                 }
 
                 //Get frequency for each letter
@@ -92,7 +97,7 @@ public class GameController {
         }
 
         if(giveup){
-            System.out.println("FAIL!!\n");
+            System.out.println("FAIL!! " + currentPlayer.getUsername() + currentPlayer.totalGuesses() +"\n");
         }
         else {
             System.out.println("WINNER!!\n");

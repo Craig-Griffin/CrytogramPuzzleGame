@@ -6,6 +6,8 @@ public class PlayerController {
 
     private final static String FILE_ALLPLAYERS = "allplayers.txt";
 
+    private GameView display = new GameView();
+
 
 
     public String promptUser(String message) {
@@ -13,7 +15,6 @@ public class PlayerController {
         System.out.print(message);
         Scanner sc = new Scanner(System.in);
         String store = sc.nextLine();
-        sc.close();
         return store;
     }
 
@@ -29,6 +30,7 @@ public class PlayerController {
             file.createNewFile();
         }
 
+        display.printLogo();
 
         System.out.println("Welome to the game!!\n");
 
@@ -50,6 +52,7 @@ public class PlayerController {
                     allPlayers.addPlayer(newPlayer);
                     valid = true;
                     System.out.println("Sign up Succesful\n");
+                    return newPlayer;
 
                 }
                 else{
@@ -64,7 +67,7 @@ public class PlayerController {
 
             if (userNameExists(username)) {
 
-                ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(new Player("userName"));
+                ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(username);
 
 
                 Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2));
@@ -76,6 +79,9 @@ public class PlayerController {
                         + " your current stats are...\n Cryptograms Played - " + current.getCryptogramsPlayed() +
                         "\n Cryptograms Completed - " + current.getCryptogramsCompleted() +
                         "\n Cryptograms Accuracy - " + current.getAccuracy());
+
+
+                return current;
 
 
             } else {
@@ -91,7 +97,7 @@ public class PlayerController {
             }
         }
 
-        return newPlayer;
+        return null;
     }
 
     public static boolean userNameExists(String userName) {

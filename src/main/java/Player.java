@@ -48,6 +48,11 @@ public class Player {
 		cryptogramsCompleted++;
 	}
 
+	public void incrementGuesses() {
+
+		totalGuesses++;
+	}
+
 	/**
 	 * Getter Method for accuracy
 	 */
