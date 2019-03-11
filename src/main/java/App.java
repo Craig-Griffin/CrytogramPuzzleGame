@@ -16,6 +16,8 @@ public class App {
         PlayerController playerController = new PlayerController();
     	
     	Player player = playerController.login();
+        playerController.menu();
+
 
     	GameController game = new GameController(MappingType.LETTERS, player);
 

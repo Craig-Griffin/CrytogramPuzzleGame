@@ -169,11 +169,7 @@ public class GameModel {
 	    return count;
 	}
 
-	//Working but only on UNIX terminal so find something better
-	public void clearScreen() {  
-		System.out.print("\033[H\033[2J");  
-		System.out.flush();  
-	}
+
 
 	public void sprintOnePrint(){
 		System.out.println("***Sprint One Console Print Out***");
