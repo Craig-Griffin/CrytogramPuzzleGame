@@ -6,8 +6,8 @@ public class GameController {
 
     private GameModel model;
     private GameView display;
-    private GenerateCrypto crypto;
     private Player currentPlayer;
+
 
     private final String FILE_ALLPLAYERS = "allplayers.txt";
 
@@ -18,17 +18,27 @@ public class GameController {
         model = new GameModel(type);
         currentPlayer = p;
 
+
+
+
     }
 
     public boolean isComplete() {
         return model.getSolution().equals(model.getUserInput());
     }
 
-    public void playGame() {
+    public void playGame() throws IOException {
+
 
         boolean giveup =  false;
+        String oldStats="";
+        String newStats="";
 
         while(!isComplete()) {
+
+            oldStats= currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
+
+
 
             display.displaycryptOrSolution(model.getCrytogram());
             display.displayUserInput(model.getUserInput());
@@ -81,7 +91,7 @@ public class GameController {
                 //Save Game
                 else if (userPlay.equals('s') || userPlay.equals('S')) {
                     System.out.println("\nsave\n");
-                    model.autocomplete();
+                    model.saveToDisk(currentPlayer);
                     validUserPlay = true;
                 }
 
@@ -113,7 +123,9 @@ public class GameController {
         //Update player stats
         currentPlayer.incrementPlayed();
         currentPlayer.updateAccuracy(currentPlayer.getCryptogramsPlayed()/4);
-        updateStats(currentPlayer);
+        newStats= currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
+
+        updateStats(currentPlayer,oldStats,newStats);
 
 
         display.displaycryptOrSolution(model.getCrytogram());
@@ -138,48 +150,32 @@ public class GameController {
     /**
      * Get the details of a player which will be used to generate an object
      */
-    public void updateStats(Player p){
+        public void updateStats(Player p, String oldStats, String newStats) {
+            try {
+                // input the file content to the StringBuffer "input"
+                BufferedReader file = new BufferedReader(new FileReader(FILE_ALLPLAYERS));
+                String line;
+                StringBuffer inputBuffer = new StringBuffer();
 
-        String line = null;
-        ArrayList<Integer> stats = new ArrayList<>();
-
-
-        try {
-
-            FileReader fileReader = new FileReader(FILE_ALLPLAYERS);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            while ((line = bufferedReader.readLine()) != null) {
-
-                String username = line.split(" ")[0];
-
-                if (username.equals(p.getUsername())) {
-
-                    FileWriter fr = new FileWriter(FILE_ALLPLAYERS, true);
-                    BufferedWriter br = new BufferedWriter(fr);
-                    PrintWriter pr = new PrintWriter(br);
-                    pr.flush();
-                    pr.print("");
-                    pr.print(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
-                    pr.close();
-                    br.close();
-                    fr.close();
-                    break;
-
+                while ((line = file.readLine()) != null) {
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
                 }
+                String inputStr = inputBuffer.toString();
 
+                file.close();
+
+               String newtext = inputStr.replace(oldStats, newStats);
+
+
+                FileOutputStream fileOut = new FileOutputStream(FILE_ALLPLAYERS);
+                fileOut.write(newtext.getBytes());
+                fileOut.close();
+
+            } catch (Exception e) {
+                System.out.println("Problem reading file.");
             }
-
-            bufferedReader.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
-        } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
-
-
         }
-
-    }
 
 
 }

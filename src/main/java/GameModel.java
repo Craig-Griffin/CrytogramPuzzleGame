@@ -40,6 +40,16 @@ public class GameModel {
 	}
 
 
+	/**
+	 * Load from file constructor
+	 */
+	public GameModel(String solution, String userInput, OneToOneMap<Character,Character> solutionMapping, OneToOneMap<Character,Character> currentMapping){
+
+
+	}
+
+
+
 	public void encrpytQuote() {
 
 		char[] quote = solution.toCharArray();
@@ -105,13 +115,29 @@ public class GameModel {
 			System.out.println("Error! " + cipher + " is not an alphabetic character!");
 			return;
 		}
-        currentMapping.remove(Character.toUpperCase(cipher));
+		currentMapping.remove(Character.toUpperCase(cipher));
 		currentMapping.put(Character.toUpperCase(cipher), '#');
 		userInputQuote();
 
 	}
 
-	public void saveToDisk() {
+	public void saveToDisk(Player p) throws IOException  {
+
+
+		File f = new File(p.getUsername()+"_save.txt");
+
+		if(f.exists())
+			f.delete();
+
+
+		f.createNewFile();
+		FileWriter fr = new FileWriter(f.getName() ,true);
+		BufferedWriter br = new BufferedWriter(fr);
+		PrintWriter pr = new PrintWriter(br);
+		pr.println(solution + "\n" + userInput + "\n" + solutionMapping + " " + currentMapping);
+		pr.close();
+		br.close();
+		fr.close();
 
 	}
 
@@ -125,13 +151,13 @@ public class GameModel {
 		char[] quote = getSolution().toCharArray();
 
 		for(int i=hintCount; i<quote.length; i++) {
-				Character c = quote[i];
-				hintCount++;
-				if(!c.equals( currentMapping.get(c))){
-					currentMapping.put(solutionMapping.get(c),c);
-					userInputQuote();
-					break;
-				}
+			Character c = quote[i];
+			hintCount++;
+			if(!c.equals( currentMapping.get(c))){
+				currentMapping.put(solutionMapping.get(c),c);
+				userInputQuote();
+				break;
+			}
 		}
 
 		System.out.println("\nHint Number: "+ hintCount+"\n");
@@ -142,33 +168,38 @@ public class GameModel {
 	public void getFrequencies() {
 		String cryto = getCrytogram();
 		HashMap<Character,Integer> temp = new HashMap<>();
-		
+
 		for(Character c: cryto.toCharArray()) {
-			
+
 			if(c != ' ' && c != '.'&&c != ',') {
 				int currentCount = countChar(cryto, c);
 				temp.put(c, currentCount);
-		
+
+			}
 		}
-		}
-		
+
 		System.out.println("\nLetter Frequencies: "+ temp.toString()+"\n");
-		
+
 
 	}
 
 	public int countChar(String str, char c)
 	{
-	    int count = 0;
+		int count = 0;
 
-	    for(int i=0; i < str.length(); i++)
-	    {    if(str.charAt(i) == c)
-	            count++;
-	    }
+		for(int i=0; i < str.length(); i++)
+		{    if(str.charAt(i) == c)
+			count++;
+		}
 
-	    return count;
+		return count;
 	}
 
+
+
+	public void loadFromFile(){
+
+	}
 
 
 	public void sprintOnePrint(){
