@@ -32,25 +32,24 @@ Still some bugs in this stage but it might be close enough for the purposes of t
 + ~~As a player I want the software to track the number of cryptograms I have successfully completed~~
      + ~~Add increment setter to the end of the while loop of when a game object is running~~
 
-+ ~~ As a player I want the software to track the number of cryptograms I have played so I can see how many games I’ve attempted~~
++ ~~As a player I want the software to track the number of cryptograms I have played so I can see how many games I’ve attempted~~
 
 + ~~As a player I want the software to track the number of correct guesses I have made so I can see how accurate I am as a percentage of my total number of guesses~~ 
     + ~~Add increment setter to the end of the while loop of when a game object is running~~
 
 + ~~As a player I want to load my details so I can track my game play statistics~~ 
 
-
-We need to create several JUnit Tests so we don't get bad marks again!
-
-TO-DO 
+#####TO-DO 
 + Most important - Work on a method which can replace a line in a file
 + Save/Load a game
+
+We need to create several JUnit Tests so we don't get bad marks again!
 
 
 #### Sprint Three
 + ~~As a player I want to be able to show the solution so I can see the answer to a cryptogram I can't solve~~
 
-+ ~~As a player I want to be able to see the frequencies of all the letters in the cryptogram so I can compare this withe the frequencies of English Letters
++ ~~As a player I want to be able to see the frequencies of all the letters in the cryptogram so I can compare this withe the frequencies of English~~ Letters
 
 + As a player I want to be able to see the top 10 scores for number of successfully completed cryptograms 
 
