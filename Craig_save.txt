@@ -1,0 +1,4 @@
+STAY HUNGRY. STAY FOOLISH.
+STA# ######. STA# #####S#.
+{A=R, B=E, C=F, D=B, E=V, F=H, G=K, H=L, I=W, J=Y, K=U, L=S, M=J, N=A, O=D, P=C, Q=G, R=N, S=X, T=O, U=T, V=I, W=M, X=Z, Y=Q, Z=P,  = , '=', ,=,, .=.}
+{A=#, B=#, C=#, D=#, E=#, F=#, G=#, H=#, I=#, J=#, K=#, L=#, M=#, N=#, O=T, P=#, Q=#, R=A, S=#, T=#, U=#, V=#, W=#, X=S, Y=#, Z=#,  = , '=', ,=,, .=.}

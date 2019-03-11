@@ -18,8 +18,13 @@ public class GameController {
         model = new GameModel(type);
         currentPlayer = p;
 
+    }
 
+    public GameController(MappingType type, Player p, String sol, String userin, String crpt, OneToOneMap<Character,Character> solMap,OneToOneMap<Character,Character>  curMap ){
 
+        display = new GameView();
+        model = new GameModel(type, sol, userin, crpt, solMap, curMap);
+        currentPlayer = p;
 
     }
 
@@ -52,6 +57,7 @@ public class GameController {
                     + "To get the frequencys of each letter enter   <f>\n"
                     + "To save your progress in this puzzle enter   <s>\n"
                     + "To Give up enter                             <g>\n"
+                    + "To Exit the game                             <q>\n"
                     + "=>");
 
             while(!validUserPlay) {
@@ -66,6 +72,7 @@ public class GameController {
 
                 }
 
+
                 //Remove a Letter
                 else if (userPlay.equals('r') || userPlay.equals('R')) {
                     Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
@@ -73,6 +80,7 @@ public class GameController {
                     validUserPlay = true;
                     currentPlayer.incrementGuesses();
                 }
+
 
                 //Get a Hint
                 else if (userPlay.equals('h') || userPlay.equals('H')) {
@@ -82,11 +90,13 @@ public class GameController {
                     currentPlayer.incrementGuesses();
                 }
 
+
                 //Get frequency for each letter
                 else if (userPlay.equals('f') || userPlay.equals('F')) {
                     model.getFrequencies();
                     validUserPlay = true;
                 }
+
 
                 //Save Game
                 else if (userPlay.equals('s') || userPlay.equals('S')) {
@@ -95,6 +105,7 @@ public class GameController {
                     validUserPlay = true;
                 }
 
+
                 //Give up
                 else if (userPlay.equals('g') || userPlay.equals('G')) {
                     System.out.println("\nsave\n");
@@ -102,6 +113,35 @@ public class GameController {
                     validUserPlay = true;
                     giveup = true;
                 }
+
+
+                //Quit
+                else if (userPlay.equals('q') || userPlay.equals('Q')){
+                    Character save = promptForChar("Would you like to Save?\n" +
+                                                   "Yes    <y>\n" +
+                                                   "No     <n>\n" +
+                                                   "=>");
+
+
+                    if(save.equals('y') || save.equals('Y')){
+                        model.saveToDisk(currentPlayer);
+                        System.out.println("\n Your game has been save. See you next time!");
+                        System.exit(0);
+                    }
+                    else if(save.equals('n') || save.equals('N')){
+                        System.out.println("\n See you next time!\n");
+                        System.exit(0);
+                    }
+                    else{
+                        System.out.println("\nPlease enter a valid option\n");
+                    }
+
+
+
+
+                }
+
+
 
                 //Letter that doesnt do anything
                 else {

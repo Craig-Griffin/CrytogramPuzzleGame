@@ -43,7 +43,18 @@ public class GameModel {
 	/**
 	 * Load from file constructor
 	 */
-	public GameModel(String solution, String userInput, OneToOneMap<Character,Character> solutionMapping, OneToOneMap<Character,Character> currentMapping){
+	public GameModel(MappingType type, String solution, String userInput, String crytogram, OneToOneMap<Character,Character> solutionMapping, OneToOneMap<Character,Character> currentMapping){
+
+		this.solution = solution;
+		this.currentMapping = currentMapping;
+		this.solutionMapping = solutionMapping;
+
+		this.crytogram = crytogram;
+		this.userInput = userInput;
+
+		hintCount=0;
+
+		userInputQuote();
 
 
 	}
@@ -134,7 +145,7 @@ public class GameModel {
 		FileWriter fr = new FileWriter(f.getName() ,true);
 		BufferedWriter br = new BufferedWriter(fr);
 		PrintWriter pr = new PrintWriter(br);
-		pr.println(solution + "\n" + userInput + "\n" + solutionMapping + " " + currentMapping);
+		pr.println(solution + "\n" + userInput + "\n" + crytogram + "\n" + solutionMapping + "\n" + currentMapping);
 		pr.close();
 		br.close();
 		fr.close();
