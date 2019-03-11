@@ -40,18 +40,18 @@ Still some bugs in this stage but it might be close enough for the purposes of t
 + ~~As a player I want to load my details so I can track my game play statistics~~ 
 
 
-We need to create several JUnit Tests so we don't get bad marks again!
+We need to create several JUnit Tests so we dont get bad marks again!
 
-TO-DO 
+TODO 
 + Most important - Work on a method which can replace a line in a file
 + Save/Load a game
 
 
 #### Sprint Three
-+ ~~As a player I want to be able to show the solution so I can see the answer to a cryptogram I can't solve~~
++ ~~As a player I wwant to be able to show the solution so I can see the answer to a cryptogram I can't solve~~
 
 + ~~As a player I want to be able to see the frequencies of all the letters in the cryptogram so I can compare this withe the frequencies of English Letters
 
 + As a player I want to be able to see the top 10 scores for number of successfully completed cryptograms 
 
-+ ~~As a player I want to be able to get a hint for a letter so I can solve the cryptogram~~
++ ~~As a player I want to be able to get a hint for a letter so I can solve the crytogram~~
