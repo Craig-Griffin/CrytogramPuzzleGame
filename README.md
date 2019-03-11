@@ -39,7 +39,7 @@ Still some bugs in this stage but it might be close enough for the purposes of t
 
 + ~~As a player I want to load my details so I can track my game play statistics~~ 
 
-#####TO-DO 
+##### TO-DO 
 + Most important - Work on a method which can replace a line in a file
 + Save/Load a game
 
