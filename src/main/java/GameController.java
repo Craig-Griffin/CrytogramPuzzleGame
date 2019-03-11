@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameController {
@@ -6,6 +8,8 @@ public class GameController {
     private GameView display;
     private GenerateCrypto crypto;
     private Player currentPlayer;
+
+    private final String FILE_ALLPLAYERS = "allplayers.txt";
 
 
     public GameController(MappingType type, Player p){
@@ -49,7 +53,7 @@ public class GameController {
 
                     model.mapLetter(one, two);
                     validUserPlay = true;
-                    currentPlayer.incrementGuesses();
+
                 }
 
                 //Remove a Letter
@@ -93,6 +97,8 @@ public class GameController {
                 else {
                     userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>\n=>");
                 }
+
+                currentPlayer.incrementGuesses();
             }
         }
 
@@ -101,9 +107,18 @@ public class GameController {
         }
         else {
             System.out.println("WINNER!!\n");
+            currentPlayer.incrementCryptogramsCompleted();
         }
+
+        //Update player stats
+        currentPlayer.incrementPlayed();
+        currentPlayer.updateAccuracy(currentPlayer.getCryptogramsPlayed()/4);
+        updateStats(currentPlayer);
+
+
         display.displaycryptOrSolution(model.getCrytogram());
         display.displaycryptOrSolution(model.getSolution());
+        System.out.println();
     }
 
     /**
@@ -119,5 +134,52 @@ public class GameController {
 
         return c;
     }
+
+    /**
+     * Get the details of a player which will be used to generate an object
+     */
+    public void updateStats(Player p){
+
+        String line = null;
+        ArrayList<Integer> stats = new ArrayList<>();
+
+
+        try {
+
+            FileReader fileReader = new FileReader(FILE_ALLPLAYERS);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String username = line.split(" ")[0];
+
+                if (username.equals(p.getUsername())) {
+
+                    FileWriter fr = new FileWriter(FILE_ALLPLAYERS, true);
+                    BufferedWriter br = new BufferedWriter(fr);
+                    PrintWriter pr = new PrintWriter(br);
+                    pr.flush();
+                    pr.print("");
+                    pr.print(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
+                    pr.close();
+                    br.close();
+                    fr.close();
+                    break;
+
+                }
+
+            }
+
+            bufferedReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+
+
+        }
+
+    }
+
 
 }

@@ -19,9 +19,7 @@ public class App {
         playerController.menu();
 
 
-    	GameController game = new GameController(MappingType.LETTERS, player);
 
-    	game.playGame();
     	
     }
 

@@ -46,6 +46,7 @@ public class PlayerController {
             String choice = promptUser("Sign Up     <s> \n" +
                                        "Login       <l>\n" +
                                        "Help        <h>\n" +
+                                       "Exit        <q>\n" +
                                        "\n=> ");
 
             if (choice.equals("s") || choice.equals("S")) {
@@ -84,30 +85,27 @@ public class PlayerController {
 
 
                     Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2));
-                    System.out.println(playerStats.get(2));
-                    System.out.println(current.getCryptogramsPlayed());
-
-
-                    System.out.println("welcome back..." + current.getUsername()
-                            + " your current stats are...\n Cryptograms Played - " + current.getCryptogramsPlayed() +
-                            "\n Cryptograms Completed - " + current.getCryptogramsCompleted() +
-                            "\n Cryptograms Accuracy - " + current.getAccuracy());
 
                     currentPlayer = current;
                     return current;
 
 
                 } else {
-                    System.out.println("could not find your username");
+                    System.out.println("\nError!! Could not find your username!\n");
                 }
 
 
             } else if(choice.equals("h") || choice.equals("H")){
                 System.out.println("\n**Help**\nuse the keyboard to select <s> to sign if you are a new player and use <l> if you are a returning player\n");
-            }else {
+            }
+            else if(choice.equals("q") || choice.equals("Q")){
+                System.exit(0);
+
+            }
+            else {
 
 
-                System.out.println("\n**Error, enter <s> or <l> or <h>** \n\n");
+                System.out.println("\n**Error!! Please enter <s>, <l>, <h> or <q> ** \n\n");
             }
         }
 
@@ -148,39 +146,74 @@ public class PlayerController {
 
     }
 
-    /*
-    public void removePlayer(){
-         else if (choice.equals("R")) {
-            String usernameToRemove = promptUser("**Removing** \n Enter player username to remove\n\n=> ");
-            if (userNameExists(usernameToRemove)) {
-                allPlayers.removePlayer(usernameToRemove);
-            }
-            else {
-                System.out.println("User does not exist");
-            }
-        }
-    }
-    */
 
 
-    public void menu() {
+    public void menu() throws IOException {
 
 
         System.out.println("\n**Hi " + currentPlayer.getUsername() + "**\n");
 
-        boolean validInput = false;
+        boolean done = false;
 
-        while (!validInput) {
+        while (!done) {
 
 
             String choice = promptUser("New Game                  <n>\n" +
                     "Load Game                 <l>\n" +
                     "View Stats                <s>\n" +
                     "View Leader Board         <b>\n" +
-                    "remove Account            <r>" +
+                    "remove Account            <r>\n" +
+                    "Go Back                   <q>\n"+
                     "\n=> ");
 
+            if(choice.equals("n")|| choice.equals("N")){
+
+                GameController game = new GameController(MappingType.LETTERS, currentPlayer);
+                game.playGame();
+
+            }
+
+            if(choice.equals("l")|| choice.equals("L")){
+
+                System.out.println("load game\n");
+            }
+
+            if(choice.equals("s")|| choice.equals("S")){
+
+                System.out.println("\n"+currentPlayer.getUsername()
+                        + " your current stats are...\n\nCryptograms Played - " + currentPlayer.getCryptogramsPlayed() +
+                        "\nCryptograms Completed - " + currentPlayer.getCryptogramsCompleted() +
+                        "\nCryptograms Accuracy - " + currentPlayer.getAccuracy()+ "\n");
+            }
+
+            if(choice.equals("b")|| choice.equals("B")){
+
+                System.out.println("View Leader Board");
+            }
+
+            if(choice.equals("r")|| choice.equals("R")){
+
+                String usernameToRemove = promptUser("**Removing** \n Enter player username to remove\n\n=> ");
+                if (userNameExists(usernameToRemove)) {
+                    allPlayers.removePlayer(usernameToRemove);
+                }
+                else {
+                    System.out.println("User does not exist");
+                }
+
+                if(usernameToRemove.equals(currentPlayer.getUsername())){
+                    login();
+                }
+            }
+
+            if(choice.equals("q")|| choice.equals("Q")){
+
+               login();
+            }
         }
+
+
+
     }
 
 

@@ -1,13 +1,2 @@
-craig 0 0 0
 Craig 0 0 0
-bob 0 0 0
-mrbeast 0 0 0
-nigs 0 0 0
-test 0 0 0
-uu 0 0 0
-craig123 0 0 0
-qwerty 0 0 0
-yui 0 0 0
-lewis 0 0 0
-cat 0 0 0
-yiuyui 0 0 0
+Craig 1 0 0l 0 0 0
