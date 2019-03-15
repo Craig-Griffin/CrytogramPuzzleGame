@@ -6,7 +6,7 @@ import java.util.Set;
  * Even then, it would be much better to implement Map than to extend HashMap, but that would be more work than the rest
  * of the actual assignment.
  * Middle ground!
- *
+ * <p>
  * An implementation of a bidirectional map using the adapter pattern on HashMap to allow bidirectional lookup between
  * keys and values.
  * Allows us to enforce one-to-one letter mappings for the cryptogram.
@@ -15,8 +15,8 @@ import java.util.Set;
  * @param <V> Arbitrary type.
  */
 public class OneToOneMap<K, V> extends HashMap<K, V> {
-   
-	private HashMap<V, K> reverseMap;
+
+    private HashMap<V, K> reverseMap;
 
     /**
      * Default constructor
@@ -51,7 +51,7 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
      */
     @Override
     public V put(K k, V v) {
-        if (reverseMap.containsKey(v) && !v.equals(' ')&& !v.equals('.')&& !v.equals(',')&& !v.equals('#') && !v.equals('\'')) {
+        if (reverseMap.containsKey(v) && !v.equals(' ') && !v.equals('.') && !v.equals(',') && !v.equals('#') && !v.equals('\'')) {
             System.out.println(v + " is already mapped to " + reverseMap.get(v));
             return null;
 
@@ -68,6 +68,7 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
 
     /**
      * Overriding HashMap::put to make it also put the key-value pair into the reverse map (in reverse, funnily enough).
+     *
      * @param key
      * @return
      */
@@ -80,7 +81,6 @@ public class OneToOneMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     *
      * @param k
      * @param newV
      * @return

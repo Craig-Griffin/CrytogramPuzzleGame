@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Random;
 
 public class GenerateCrypto {
@@ -13,7 +12,7 @@ public class GenerateCrypto {
     private GameModel game;
     private String solution;
 
-    public GenerateCrypto(){
+    public GenerateCrypto() {
 
         solution = loadRandomQuote();
 
@@ -22,9 +21,10 @@ public class GenerateCrypto {
     /**
      * Method which will open quotes file read in each line to an array list
      * A random quote will be selected from this array list and returned.
+     *
      * @return randomQuote
      */
-    public String loadRandomQuote(){
+    public String loadRandomQuote() {
 
         String line = null;
         ArrayList<String> quotes = new ArrayList<>();
@@ -54,7 +54,7 @@ public class GenerateCrypto {
     }
 
 
-    public String getSolution(){
+    public String getSolution() {
         return solution;
     }
 
@@ -64,15 +64,15 @@ public class GenerateCrypto {
      * Current Map will be assigned # as a place holder
      * Spaces and punctuation will be ingonred
      */
-    public OneToOneMap<Character,Character> generateCrypto() {
+    public OneToOneMap<Character, Character> generateCrypto() {
 
-        OneToOneMap<Character,Character> solutionMapping = new OneToOneMap<>();
+        OneToOneMap<Character, Character> solutionMapping = new OneToOneMap<>();
 
-        ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
+        ArrayList<Character> alphabet = new ArrayList<>(Util.getAlphaSet());
         ArrayList<Character> shuffled = new ArrayList<>(alphabet);
         Collections.shuffle(shuffled);
 
-        for(int i = 0; i < alphabet.size(); i++) {
+        for (int i = 0; i < alphabet.size(); i++) {
             solutionMapping.put(shuffled.get(i), alphabet.get(i));
 
         }
@@ -84,7 +84,6 @@ public class GenerateCrypto {
         solutionMapping.put('\'', '\'');
 
 
-
         return solutionMapping;
     }
 
@@ -94,21 +93,20 @@ public class GenerateCrypto {
      */
 
 
-    public OneToOneMap<Character,Character> generateBlank() {
+    public OneToOneMap<Character, Character> generateBlank() {
 
         getSolution();
 
 
-        OneToOneMap<Character,Character> currentMapping = new OneToOneMap<>();
+        OneToOneMap<Character, Character> currentMapping = new OneToOneMap<>();
 
-        ArrayList<Character> alphabet = new ArrayList<>(Reference.getAlphaSet());
+        ArrayList<Character> alphabet = new ArrayList<>(Util.getAlphaSet());
         ArrayList<Character> shuffled = new ArrayList<>(alphabet);
         Collections.shuffle(shuffled);
 
 
-
-        for(int i = 0; i < alphabet.size(); i++) {
-            currentMapping.put(alphabet.get(i),'#');
+        for (int i = 0; i < alphabet.size(); i++) {
+            currentMapping.put(alphabet.get(i), '#');
 
         }
 
@@ -122,9 +120,6 @@ public class GenerateCrypto {
 
         return currentMapping;
     }
-
-
-
 
 
 }
