@@ -160,9 +160,7 @@ public class GameController {
     public Character promptForChar(String message) {
         System.out.print(message);
         Scanner sc = new Scanner(System.in);
-        Character c = sc.next().charAt(0);
-
-        return c;
+        return sc.next().charAt(0);
     }
 
     /**

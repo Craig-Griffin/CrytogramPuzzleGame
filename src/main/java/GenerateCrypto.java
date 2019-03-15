@@ -13,7 +13,6 @@ public class GenerateCrypto {
     private String solution;
 
     public GenerateCrypto() {
-
         solution = loadRandomQuote();
 
     }
@@ -25,13 +24,12 @@ public class GenerateCrypto {
      * @return randomQuote
      */
     public String loadRandomQuote() {
-
         String line = null;
         ArrayList<String> quotes = new ArrayList<>();
 
         try {
 
-            FileReader fileReader = new FileReader(FILE_QUOTES);
+            FileReader fileReader = new FileReader(Util.loadResource(FILE_QUOTES));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -91,8 +89,6 @@ public class GenerateCrypto {
      * Use the solution Mapping to get the letters that are relevant to the solution and
      * store the random sequence of letters in the crytogram variable
      */
-
-
     public OneToOneMap<Character, Character> generateBlank() {
 
         getSolution();
@@ -107,11 +103,9 @@ public class GenerateCrypto {
 
         for (int i = 0; i < alphabet.size(); i++) {
             currentMapping.put(alphabet.get(i), '#');
-
         }
 
         //Map punctuation to avoid null pointer exceptions
-
         currentMapping.put(' ', ' ');
         currentMapping.put('.', '.');
         currentMapping.put(',', ',');
