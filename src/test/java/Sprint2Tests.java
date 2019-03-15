@@ -74,6 +74,8 @@ public class Sprint2Tests {
     /*User Story Five*/
     @Test
     public void makeSureNumberOfCryptosWonIsTracked(){
+        Player bob = new Player("bob");
+
 
     }
 
@@ -83,11 +85,6 @@ public class Sprint2Tests {
     public void makeSureAccuracyIsTracked(){
 
     }
-
-
-
-
-
 
     /*User Story Seven*/
     @Test

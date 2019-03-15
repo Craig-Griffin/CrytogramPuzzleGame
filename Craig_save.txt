@@ -1,4 +1,5 @@
-STAY HUNGRY. STAY FOOLISH.
-STA# ######. STA# #####S#.
-{A=R, B=E, C=F, D=B, E=V, F=H, G=K, H=L, I=W, J=Y, K=U, L=S, M=J, N=A, O=D, P=C, Q=G, R=N, S=X, T=O, U=T, V=I, W=M, X=Z, Y=Q, Z=P,  = , '=', ,=,, .=.}
-{A=#, B=#, C=#, D=#, E=#, F=#, G=#, H=#, I=#, J=#, K=#, L=#, M=#, N=#, O=T, P=#, Q=#, R=A, S=#, T=#, U=#, V=#, W=#, X=S, Y=#, Z=#,  = , '=', ,=,, .=.}
+EVERYTHING YOU CAN IMAGINE IS REAL.
+EVERYTHING YOU CAN IMAGINE IS REA#.
+XJXRUGEYAN UOI LZA YDZNYAX YT RXZF.
+{A=Z, B=Q, C=L, D=S, E=X, F=M, G=N, H=E, I=Y, J=K, K=P, L=F, M=D, N=A, O=O, P=V, Q=W, R=R, S=T, T=G, U=I, V=J, W=C, X=H, Y=U, Z=B,  = , '=', ,=,, .=.}
+{A=N, B=#, C=#, D=M, E=H, F=#, G=T, H=#, I=U, J=V, K=#, L=C, M=#, N=G, O=O, P=#, Q=#, R=R, S=#, T=S, U=Y, V=#, W=#, X=E, Y=I, Z=A,  = , '=', ,=,, .=.}

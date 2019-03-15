@@ -86,7 +86,7 @@ public class PlayerController {
                     ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(username);
 
 
-                    Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2));
+                    Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2),playerStats.get(3));
 
                     currentPlayer = current;
                     return current;
@@ -238,7 +238,8 @@ public class PlayerController {
                 System.out.println("\n"+currentPlayer.getUsername()
                         + " your current stats are...\n\nCryptograms Played - " + currentPlayer.getCryptogramsPlayed() +
                         "\nCryptograms Completed - " + currentPlayer.getCryptogramsCompleted() +
-                        "\nCryptograms Accuracy - " + currentPlayer.getAccuracy()+ "\n");
+                        "\nCryptograms Accuracy - " + currentPlayer.getAccuracy()+"\n" +
+                        "tests"+ currentPlayer.getCorrectGuesses()+ " "+ currentPlayer.getTotalGuesses()+"\n");
             }
 
 

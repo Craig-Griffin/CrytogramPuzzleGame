@@ -1,5 +1,4 @@
-bob 2 1 0
-b 2 1 0
-craig 0 0 0
-h 0 0 0
-new 0 0 0
+tset 1 0 1 0
+Craig 4 1 25 2
+asdf 1 1 24 0
+test 0 0 1 0

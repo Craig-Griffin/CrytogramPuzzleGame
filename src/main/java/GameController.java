@@ -36,12 +36,13 @@ public class GameController {
 
 
         boolean giveup =  false;
-        String oldStats="";
-        String newStats="";
+        String oldStats = "";
+        String newStats = "";
+        int countGuesses=0;
 
         while(!isComplete()) {
 
-            oldStats= currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
+            oldStats= currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses()+ " " + currentPlayer.getCorrectGuesses();
 
 
 
@@ -69,6 +70,13 @@ public class GameController {
 
                     model.mapLetter(one, two);
                     validUserPlay = true;
+                    currentPlayer.incrementGuesses();
+                    countGuesses++;
+
+                    if(model.checkForCorrectMove(one,two)){
+                        currentPlayer.incrementCorrectGuesses();
+                        System.out.println("Correct!!");
+                    }
 
                 }
 
@@ -79,6 +87,7 @@ public class GameController {
                     model.removeLetter(one);
                     validUserPlay = true;
                     currentPlayer.incrementGuesses();
+                    countGuesses++;
                 }
 
 
@@ -88,6 +97,7 @@ public class GameController {
                     model.giveHint();
                     validUserPlay = true;
                     currentPlayer.incrementGuesses();
+                    countGuesses++;
                 }
 
 
@@ -95,6 +105,8 @@ public class GameController {
                 else if (userPlay.equals('f') || userPlay.equals('F')) {
                     model.getFrequencies();
                     validUserPlay = true;
+                    currentPlayer.incrementGuesses();
+                    countGuesses++;
                 }
 
 
@@ -142,30 +154,35 @@ public class GameController {
                 }
 
 
-
                 //Letter that doesnt do anything
                 else {
-                    userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>\n=>");
+                    userPlay = promptForChar("\nInvalid Choice!! Try another option...\n=>");
                 }
-
-                currentPlayer.incrementGuesses();
             }
         }
 
         if(giveup){
-            System.out.println("FAIL!! " + currentPlayer.getUsername() + currentPlayer.totalGuesses() +"\n");
+            System.out.println("FAIL!! " + currentPlayer.getUsername() + currentPlayer.getTotalGuesses() +"\n");
+            currentPlayer.incrementPlayed();
+
+
         }
         else {
             System.out.println("WINNER!!\n");
             currentPlayer.incrementCryptogramsCompleted();
+            currentPlayer.incrementPlayed();
         }
 
         //Update player stats
-        currentPlayer.incrementPlayed();
-        currentPlayer.updateAccuracy(currentPlayer.getCryptogramsPlayed()/4);
-        newStats= currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
+        currentPlayer.updateAccuracy();
+        newStats= currentPlayer.getUsername() +" "+ currentPlayer.getCryptogramsPlayed()+ " "+currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses()+ " " + currentPlayer.getCorrectGuesses();
+
+
+        System.out.println(oldStats + "  " + newStats);
+
 
         updateStats(currentPlayer,oldStats,newStats);
+
 
 
         display.displaycryptOrSolution(model.getCrytogram());
@@ -190,32 +207,55 @@ public class GameController {
     /**
      * Get the details of a player which will be used to generate an object
      */
-        public void updateStats(Player p, String oldStats, String newStats) {
+        public void updateStats(Player p,String oldStats, String newStats) {
             try {
                 // input the file content to the StringBuffer "input"
                 BufferedReader file = new BufferedReader(new FileReader(FILE_ALLPLAYERS));
                 String line;
-                StringBuffer inputBuffer = new StringBuffer();
+
+
+                ArrayList<String> temp = new ArrayList<>();
 
                 while ((line = file.readLine()) != null) {
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
+                    temp.add(line);
                 }
-                String inputStr = inputBuffer.toString();
+
 
                 file.close();
 
-               String newtext = inputStr.replace(oldStats, newStats);
+                for(int i=0; i<temp.size(); i++){
+
+                   String[] hold = temp.get(i).split(" ", 2);
+                   String username = hold[0];
+
+                    if (username.equals(p.getUsername())){
+                        temp.set(i,newStats);
+                    }
+                }
+
+
+                String newText = temp.toString();
+                newText = newText.substring(1, newText.length()-1);
+                String[] data = newText.split(", ");
+
+
+                String forFile="";
+
+               for(int x=0; x<data.length; x++){
+                   forFile = forFile + data[x] + "\n";
+               }
 
 
                 FileOutputStream fileOut = new FileOutputStream(FILE_ALLPLAYERS);
-                fileOut.write(newtext.getBytes());
+                fileOut.write(forFile.getBytes());
                 fileOut.close();
 
             } catch (Exception e) {
                 System.out.println("Problem reading file.");
             }
         }
+
+
 
 
 }

@@ -116,6 +116,8 @@ public class GameModel {
 
 		currentMapping.put(Character.toUpperCase(cipher), Character.toUpperCase(mapping));
 		userInputQuote();
+
+
 	}
 
 	/**
@@ -175,6 +177,15 @@ public class GameModel {
 
 	}
 
+	public boolean checkForCorrectMove(Character m, Character c){
+
+		if(Character.toUpperCase(m) == solutionMapping.get(Character.toUpperCase(c))) {
+			return true;
+		}
+		return false;
+
+	}
+
 
 	public void getFrequencies() {
 		String cryto = getCrytogram();
@@ -208,9 +219,7 @@ public class GameModel {
 
 
 
-	public void loadFromFile(){
 
-	}
 
 
 	public void sprintOnePrint(){

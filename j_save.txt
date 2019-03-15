@@ -1,0 +1,5 @@
+STAY HUNGRY. STAY FOOLISH.
+STAY HUNGRY. STAY #####SH.
+WIDR SECBZR. WIDR AFFNOWS.
+{A=D, B=G, C=M, D=L, E=K, F=A, G=B, H=S, I=O, J=Y, K=V, L=N, M=H, N=C, O=F, P=X, Q=P, R=Z, S=W, T=I, U=E, V=Q, W=U, X=J, Y=R, Z=T,  = , '=', ,=,, .=.}
+{A=#, B=G, C=N, D=A, E=U, F=#, G=#, H=#, I=T, J=#, K=#, L=#, M=#, N=#, O=#, P=#, Q=#, R=Y, S=H, T=#, U=#, V=#, W=S, X=#, Y=#, Z=R,  = , '=', ,=,, .=.}
