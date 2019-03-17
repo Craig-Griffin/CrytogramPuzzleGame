@@ -82,6 +82,7 @@ public class Player {
 	 */
 	public int getAccuracy() {
 
+		updateAccuracy();
 		return accuracy;
 	}
 

@@ -238,8 +238,9 @@ public class PlayerController {
                 System.out.println("\n"+currentPlayer.getUsername()
                         + " your current stats are...\n\nCryptograms Played - " + currentPlayer.getCryptogramsPlayed() +
                         "\nCryptograms Completed - " + currentPlayer.getCryptogramsCompleted() +
-                        "\nCryptograms Accuracy - " + currentPlayer.getAccuracy()+"\n" +
-                        "tests"+ currentPlayer.getCorrectGuesses()+ " "+ currentPlayer.getTotalGuesses()+"\n");
+                        "\nCryptograms Accuracy - " + ((float)currentPlayer.getCorrectGuesses()/currentPlayer.getTotalGuesses())*100+"%\n" +
+                        "Correct Guesses - "+ currentPlayer.getCorrectGuesses()+ "\n" +
+                        "Total Guesses - " + currentPlayer.getTotalGuesses()+"\n");
             }
 
 

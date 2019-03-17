@@ -178,9 +178,6 @@ public class GameController {
         newStats= currentPlayer.getUsername() +" "+ currentPlayer.getCryptogramsPlayed()+ " "+currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses()+ " " + currentPlayer.getCorrectGuesses();
 
 
-        System.out.println(oldStats + "  " + newStats);
-
-
         updateStats(currentPlayer,oldStats,newStats);
 
 
