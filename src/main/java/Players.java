@@ -1,10 +1,11 @@
+import misc.Paths;
+
 import java.io.*;
 import java.util.ArrayList;
 
 
 public class Players {
     private ArrayList<Player> allPlayers = new ArrayList<>();
-    private final String FILE_ALLPLAYERS = "allplayers.txt";
 
     /**
      * Add a new player to the file
@@ -25,7 +26,7 @@ public class Players {
      */
     public void removePlayer(String p) throws IOException {
         try {
-            File current = new File(FILE_ALLPLAYERS);
+            File current = new File(Paths.PLAYERS_FILE);
             File temp = new File("temp.txt");
 
             FileReader fr = new FileReader(current);
@@ -42,7 +43,7 @@ public class Players {
             bw.close();
             br.close();
             current.delete();
-            temp.renameTo(new File(FILE_ALLPLAYERS));
+            temp.renameTo(new File(Paths.PLAYERS_FILE));
             allPlayers.remove(p);
 
         } catch (IOException ex) {
@@ -84,7 +85,7 @@ public class Players {
      */
     public void writeUser(Player p) throws IOException {
         try {
-            FileWriter fr = new FileWriter(FILE_ALLPLAYERS, true);
+            FileWriter fr = new FileWriter(Paths.PLAYERS_FILE, true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter pr = new PrintWriter(br);
             pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
@@ -94,9 +95,9 @@ public class Players {
 
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
         }
     }
 
@@ -110,7 +111,7 @@ public class Players {
 
         try {
 
-            FileReader fileReader = new FileReader(FILE_ALLPLAYERS);
+            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -124,9 +125,9 @@ public class Players {
             }
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
 
 
         }
@@ -142,7 +143,7 @@ public class Players {
 
         try {
 
-            FileReader fileReader = new FileReader(FILE_ALLPLAYERS);
+            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -165,9 +166,9 @@ public class Players {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
 
         }
         return stats;

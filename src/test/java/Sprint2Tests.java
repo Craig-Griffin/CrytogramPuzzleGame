@@ -1,5 +1,6 @@
 
 import misc.MappingType;
+import misc.Paths;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
@@ -9,16 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class Sprint2Tests {
-
-    File playerFile;
-    Players allPlayers;
-    PlayerController pController;
-    GameController gController;
+    private static String backupPath = "test/allplayers_backup.txt";
+    private String username = "john";
+    private File playerFile;
+    private Players allPlayers;
+    private PlayerController pController;
+    private GameController gController;
 
     @BeforeAll
     static void doInitially() throws IOException {
-        File savedPlayerList = new File("savedList.txt");
-        File currentPlayerList = new File("allplayers.txt");
+        File savedPlayerList = new File(backupPath);
+        File currentPlayerList = new File(Paths.PLAYERS_FILE);
         if (currentPlayerList.exists()) {
             currentPlayerList.renameTo(savedPlayerList);
         }
@@ -26,8 +28,8 @@ public class Sprint2Tests {
 
     @AfterAll
     static void doAfterAll() {
-        File savedPlayerList = new File("savedList.txt");
-        File currentPlayerList = new File("allplayers.txt");
+        File savedPlayerList = new File(backupPath);
+        File currentPlayerList = new File(Paths.PLAYERS_FILE);
         if (savedPlayerList.exists()) {
             currentPlayerList.delete();
             savedPlayerList.renameTo(currentPlayerList);
@@ -36,7 +38,7 @@ public class Sprint2Tests {
 
     @BeforeEach
     void setUpEach() throws IOException {
-        File currentPlayerList = new File("allplayers.txt");
+        File currentPlayerList = new File(Paths.PLAYERS_FILE);
         if (currentPlayerList.exists()) {
             currentPlayerList.delete();
         }
@@ -56,10 +58,10 @@ public class Sprint2Tests {
     @Test
     public void makeSureSaveIsWorking() {
         //Generate a new Game and player
-        Player john = new Player("john");
+        Player john = new Player(username);
         GameModel game = new GameModel(MappingType.LETTERS);
 
-        playerFile = new File(john.getUsername() + "_save.txt");
+        playerFile = new File(Paths.getPlayerSaveFilePath(username));
 
         //perform a save
         try {
@@ -79,7 +81,7 @@ public class Sprint2Tests {
     public void makeSureLoadIsWorking() {
 
         //generate new game
-        Player john = new Player("john");
+        Player john = new Player(username);
         GameModel game = new GameModel(MappingType.LETTERS);
         //make a random mapping to check loading properly
         game.mapLetter('e', 'l', john);
@@ -109,12 +111,12 @@ public class Sprint2Tests {
     public void makeSurePlayerNameIsStored() {
 
         //Generate a new Player
-        Player john = new Player("john");
+        Player john = new Player(username);
 
         try {
             allPlayers.addPlayer(john);
-            assertTrue(pController.userNameExists("john"));
-            assertEquals(allPlayers.getAllPlayers().get(0).getUsername(), "john");
+            assertTrue(pController.userNameExists(username));
+            assertEquals(allPlayers.getAllPlayers().get(0).getUsername(), username);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,7 +127,7 @@ public class Sprint2Tests {
     /*User Story Four*/
     @Test
     public void makeSureNumberOfCryptosPlayedIsTracked() {
-        Player john = new Player("john");
+        Player john = new Player(username);
         try {
             allPlayers.addPlayer(john);
         } catch (IOException e) {
@@ -140,7 +142,7 @@ public class Sprint2Tests {
     @Test
     public void makeSureNumberOfCryptosWonIsTracked(){
 
-        Player john = new Player("john");
+        Player john = new Player(username);
         try {
             allPlayers.addPlayer(john);
         }
@@ -182,7 +184,7 @@ public class Sprint2Tests {
     /*User Story Six*/
     @Test
     public void makeSureAccuracyIsTracked(){
-        Player john = new Player("john");
+        Player john = new Player(username);
         try {
             allPlayers.addPlayer(john);
         }
@@ -204,14 +206,14 @@ public class Sprint2Tests {
     /*User Story Seven*/
     @Test
     public void makeSurePlayerStatsAreLoaded(){
-        Player john = new Player("john");
+        Player john = new Player(username);
         try {
             allPlayers.addPlayer(john);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> stats = allPlayers.loadStatsFromFile("john");
+        ArrayList<Integer> stats = allPlayers.loadStatsFromFile(username);
         assertEquals(0, stats.get(0).intValue());
         assertEquals(0, stats.get(1).intValue());
         assertEquals(0, stats.get(2).intValue());
@@ -219,7 +221,7 @@ public class Sprint2Tests {
         john.incrementCryptogramsCompleted();
         john.updateAccuracy();
         try {
-            allPlayers.removePlayer("john");
+            allPlayers.removePlayer(username);
             allPlayers.writeUser(john);
             allPlayers.writeUser(new Player("FReed"));
         }
@@ -228,7 +230,7 @@ public class Sprint2Tests {
         }
         john.incrementCryptogramsCompleted();
         assertEquals(2, john.getCryptogramsCompleted());
-        stats = allPlayers.loadStatsFromFile("john");
+        stats = allPlayers.loadStatsFromFile(username);
         assertEquals(1, stats.get(0).intValue());
         assertEquals(1, stats.get(1).intValue());
         assertEquals(0, stats.get(2).intValue());

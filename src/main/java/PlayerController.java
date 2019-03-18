@@ -1,4 +1,3 @@
-import UI.GameView;
 import misc.MappingType;
 import misc.OneToOneMap;
 import misc.Paths;
