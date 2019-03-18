@@ -6,6 +6,8 @@ public class Player {
     private int cryptogramsPlayed;
     private int cryptogramsCompleted;
 
+    private int correctGuesses;
+
     /**
      * Constructor for a new player (i.e. there is no data saved on them yet)
      */
@@ -32,9 +34,10 @@ public class Player {
     /**
      * Setter Method for accuracy
      */
-    public void updateAccuracy(int newAccuracy) {
-        accuracy = newAccuracy;
-
+    public void updateAccuracy() {
+        if (totalGuesses != 0) {
+            accuracy = correctGuesses / totalGuesses;
+        }
     }
 
     /**
@@ -85,5 +88,17 @@ public class Player {
      */
     public int totalGuesses() {
         return totalGuesses;
+    }
+
+    public void incrementCorrectGuesses() {
+        correctGuesses++;
+    }
+
+    public int getTotalGuesses() {
+        return totalGuesses;
+    }
+
+    public int getCorrectGuesses() {
+        return correctGuesses;
     }
 }

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameController {
@@ -22,17 +23,19 @@ public class GameController {
 
     }
 
+    public GameModel getModel() {
+        return model;
+    }
+
     public boolean isComplete() {
         return model.getSolution().equals(model.getUserInput());
     }
 
     public void playGame() throws IOException {
         boolean giveup = false;
-        String oldStats = "";
         String newStats = "";
 
         while (!isComplete()) {
-            oldStats = currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
 
             display.displaycryptOrSolution(model.getCrytogram());
             display.displayUserInput(model.getUserInput());
@@ -56,7 +59,7 @@ public class GameController {
                     Character one = promptForChar("\nEnter the letter you would like map\n=> ");
                     Character two = promptForChar("Enter the letter you would like to map\n=> ");
 
-                    model.mapLetter(one, two);
+                    model.mapLetter(one, two, currentPlayer);
                     validUserPlay = true;
 
                 }
@@ -67,16 +70,16 @@ public class GameController {
                     Character one = promptForChar("\nEnter the letter you would like to remove from the puzzle\n=> ");
                     model.removeLetter(one);
                     validUserPlay = true;
-                    currentPlayer.incrementGuesses();
+                    model.addGuess(currentPlayer);
                 }
 
 
                 //Get a Hint
                 else if (userPlay.equals('h') || userPlay.equals('H')) {
 
-                    model.giveHint();
+                    model.giveHint(currentPlayer);
                     validUserPlay = true;
-                    currentPlayer.incrementGuesses();
+                    model.addGuess(currentPlayer);
                 }
 
 
@@ -84,6 +87,7 @@ public class GameController {
                 else if (userPlay.equals('f') || userPlay.equals('F')) {
                     model.getFrequencies();
                     validUserPlay = true;
+                    model.addGuess(currentPlayer);
                 }
 
 
@@ -98,7 +102,7 @@ public class GameController {
                 //Give up
                 else if (userPlay.equals('g') || userPlay.equals('G')) {
                     System.out.println("\nsave\n");
-                    model.autocomplete();
+                    model.autocomplete(currentPlayer);
                     validUserPlay = true;
                     giveup = true;
                 }
@@ -117,6 +121,7 @@ public class GameController {
                         System.exit(0);
 
                     } else if (save.equals('n') || save.equals('N')) {
+                        model.quitWithoutSave(currentPlayer);
                         System.out.println("\n See you next time!\n");
                         System.exit(0);
 
@@ -128,7 +133,7 @@ public class GameController {
                     userPlay = promptForChar("\nInvalid Choice!! To enter a letter into the Puzzle enter <e>, To remove a letter from the puzzle enter <r>\n=>");
                 }
 
-                currentPlayer.incrementGuesses();
+                model.addGuess(currentPlayer);
             }
         }
 
@@ -136,15 +141,13 @@ public class GameController {
             System.out.println("FAIL!! " + currentPlayer.getUsername() + currentPlayer.totalGuesses() + "\n");
         } else {
             System.out.println("WINNER!!\n");
-            currentPlayer.incrementCryptogramsCompleted();
         }
 
         //Update player stats
-        currentPlayer.incrementPlayed();
-        currentPlayer.updateAccuracy(currentPlayer.getCryptogramsPlayed() / 4);
-        newStats = currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getAccuracy();
+        model.updatePlayerAccuracy(currentPlayer);
+        newStats = currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses() + " " + currentPlayer.getCorrectGuesses();
 
-        updateStats(currentPlayer, oldStats, newStats);
+        updateStats(currentPlayer, newStats);
 
         display.displaycryptOrSolution(model.getCrytogram());
         display.displaycryptOrSolution(model.getSolution());
@@ -166,29 +169,54 @@ public class GameController {
     /**
      * Get the details of a player which will be used to generate an object
      */
-    public void updateStats(Player p, String oldStats, String newStats) {
+    public void updateStats(Player p, String newStats) {
         try {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader(FILE_ALLPLAYERS));
             String line;
-            StringBuffer inputBuffer = new StringBuffer();
+
+
+            ArrayList<String> temp = new ArrayList<>();
 
             while ((line = file.readLine()) != null) {
-                inputBuffer.append(line);
-                inputBuffer.append('\n');
+                temp.add(line);
             }
-            String inputStr = inputBuffer.toString();
+
+
             file.close();
 
-            String newtext = inputStr.replace(oldStats, newStats);
+            for(int i=0; i<temp.size(); i++){
+
+                String[] hold = temp.get(i).split(" ", 2);
+                String username = hold[0];
+
+                if (username.equals(p.getUsername())){
+                    temp.set(i,newStats);
+                }
+            }
+
+
+            String newText = temp.toString();
+            newText = newText.substring(1, newText.length()-1);
+            String[] data = newText.split(", ");
+
+
+            String forFile="";
+
+            for(int x=0; x<data.length; x++){
+                forFile = forFile + data[x] + "\n";
+            }
+
+
             FileOutputStream fileOut = new FileOutputStream(FILE_ALLPLAYERS);
-            fileOut.write(newtext.getBytes());
+            fileOut.write(forFile.getBytes());
             fileOut.close();
 
         } catch (Exception e) {
             System.out.println("Problem reading file.");
         }
     }
+
 
 
 }

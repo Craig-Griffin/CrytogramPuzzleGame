@@ -126,7 +126,7 @@ public class PlayerController {
                     "Load Game                 <l>\n" +
                     "View Stats                <s>\n" +
                     "View Leader Board         <b>\n" +
-                    "remove Account            <r>\n" +
+                    "Remove Account            <r>\n" +
                     "Go Back                   <q>\n" +
                     "\n=> ");
 
@@ -148,32 +148,7 @@ public class PlayerController {
                     game.playGame();
 
                 } else {
-                    ArrayList<String> components = new ArrayList<>();
-                    String line = null;
-
-                    try {
-                        FileReader fileReader = new FileReader(currentPlayer.getUsername() + "_save.txt");
-                        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-                        while ((line = bufferedReader.readLine()) != null) {
-                            components.add(line);
-                        }
-
-                        bufferedReader.close();
-
-                    } catch (FileNotFoundException ex) {
-                        System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
-                    } catch (IOException ex) {
-                        System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
-                    }
-
-                    String solution = components.get(0);
-                    String userInput = components.get(1);
-                    String cryptogram = components.get(2);
-                    OneToOneMap<Character, Character> solutionMapping = convertToOneToOneMap(components.get(3));
-                    OneToOneMap<Character, Character> currentMapping = convertToOneToOneMap(components.get(4));
-
-                    GameController game = new GameController(MappingType.LETTERS, currentPlayer, solution, userInput, cryptogram, solutionMapping, currentMapping);
+                    GameController game = loadGame(currentPlayer);
                     game.playGame();
                 }
             }
@@ -196,8 +171,9 @@ public class PlayerController {
                 String usernameToRemove = promptUser("**Removing** \n Enter player username to remove\n\n=> ");
                 if (userNameExists(usernameToRemove)) {
                     allPlayers.removePlayer(usernameToRemove);
+                    System.out.println(usernameToRemove + " removed\n");
                 } else {
-                    System.out.println("User does not exist");
+                    System.out.println("User does not exist\n");
                 }
 
                 if (usernameToRemove.equals(currentPlayer.getUsername())) {
@@ -234,6 +210,35 @@ public class PlayerController {
 
         return map;
 
+    }
+
+    GameController loadGame(Player currentP) {
+        ArrayList<String> components = new ArrayList<>();
+        String line = null;
+
+        try {
+            FileReader fileReader = new FileReader(currentP.getUsername() + "_save.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                components.add(line);
+            }
+
+            bufferedReader.close();
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+        }
+
+        String solution = components.get(0);
+        String userInput = components.get(1);
+        String cryptogram = components.get(2);
+        OneToOneMap<Character, Character> solutionMapping = convertToOneToOneMap(components.get(3));
+        OneToOneMap<Character, Character> currentMapping = convertToOneToOneMap(components.get(4));
+
+        return new GameController(MappingType.LETTERS, currentPlayer, solution, userInput, cryptogram, solutionMapping, currentMapping);
     }
 
 

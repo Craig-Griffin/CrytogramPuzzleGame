@@ -88,31 +88,49 @@ public class GameModel {
      * @param cipher
      * @param mapping
      */
-    public void mapLetter(char cipher, char mapping) {
+    public boolean mapLetter(char cipher, char mapping, Player p) {
+        boolean correctGuess = false;
         if (!Character.isAlphabetic(cipher)) {
             System.out.println("Error! " + cipher + " is not an alphabetic character!");
-            return;
+            return correctGuess;
         }
 
         if (!Character.isAlphabetic(mapping)) {
             System.out.println("Error! " + mapping + " is not an alphabetic character!");
-            return;
+            return correctGuess;
         }
 
         if (currentMapping.containsKey(cipher)) {
             System.out.println(cipher + " already has a mapping! You mapped " + currentMapping.get(cipher) + " to it!");
-            return;
+            return correctGuess;
         }
 
         if (currentMapping.containsValue(mapping)) {
             System.out.println("You already mapped " + currentMapping.getReverse(mapping) + " to " + mapping + "!");
-            return;
+            return correctGuess;
         }
 
+        p.incrementGuesses();
+        if (checkIfRight(cipher, mapping)) {
+            p.incrementCorrectGuesses();
+            correctGuess = true;
+        }
         currentMapping.put(Character.toUpperCase(cipher), Character.toUpperCase(mapping));
         userInputQuote();
+        if (userInput.equals(solution)) {
+            p.incrementPlayed();
+            p.incrementCryptogramsCompleted();
+
+        }
+        return correctGuess;
     }
 
+    public boolean checkIfRight(char mapping, char cipherChar) {
+        if (Character.toUpperCase(mapping) == solutionMapping.get(Character.toUpperCase(cipherChar))) {
+            return true;
+        }
+        return false;
+    }
     /**
      * Method which will remove a letter from the current Mapping
      */
@@ -145,12 +163,13 @@ public class GameModel {
 
     }
 
-    public void autocomplete() {
+    public void autocomplete(Player p) {
+        p.incrementPlayed();
         userInput = solution;
     }
 
 
-    public void giveHint() {
+    public void giveHint(Player p) {
         char[] quote = getSolution().toCharArray();
 
         for (int i = hintCount; i < quote.length; i++) {
@@ -164,6 +183,11 @@ public class GameModel {
         }
 
         System.out.println("\nHint Number: " + hintCount + "\n");
+
+        if (userInput.equals(solution)) {
+            p.incrementPlayed();
+            return;
+        }
 
     }
 
@@ -182,6 +206,18 @@ public class GameModel {
         System.out.println("\nLetter Frequencies: " + temp.toString() + "\n");
     }
 
+    public void addGuess(Player p) {
+        p.incrementGuesses();
+    }
+
+    public void updatePlayerAccuracy(Player p) {
+        p.updateAccuracy();
+    }
+
+    public void quitWithoutSave(Player p) {
+        p.incrementPlayed();
+    }
+
     public int countChar(String str, char c) {
         int count = 0;
 
@@ -194,8 +230,7 @@ public class GameModel {
     }
 
 
-    public void loadFromFile() {
-
+    void loadFromFile(){ //workaround being used in PlayerController, hard to refactor
     }
 
 

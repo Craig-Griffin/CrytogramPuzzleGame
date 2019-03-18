@@ -1,5 +1,2 @@
-bob 2 1 0
-b 2 1 0
-craig 0 0 0
-h 0 0 0
-new 0 0 0
+stu 2 0 2 0
+red 0 0 0

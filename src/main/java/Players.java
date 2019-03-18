@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 public class Players {
-    private ArrayList<Player> allPlayers;
+    private ArrayList<Player> allPlayers = new ArrayList<>();
     private final String FILE_ALLPLAYERS = "allplayers.txt";
 
     /**
@@ -12,6 +12,7 @@ public class Players {
     public void addPlayer(Player p) throws IOException {
         if (validateUserName(p)) {
             writeUser(p);
+            allPlayers.add(p);
 
         } else {
             System.out.println("Username all ready exists!");
@@ -38,13 +39,19 @@ public class Players {
                     bw.write(line + System.getProperty("line.separator"));
                 }
             }
-            temp.renameTo(current);
             bw.close();
             br.close();
-            temp.delete();
+            current.delete();
+            temp.renameTo(new File(FILE_ALLPLAYERS));
+            allPlayers.remove(p);
+
         } catch (IOException ex) {
             System.out.println("Error writing to file");
         }
+    }
+
+    public ArrayList<Player> getAllPlayers() {
+        return allPlayers;
     }
 
     /**
