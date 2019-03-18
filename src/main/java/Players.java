@@ -88,7 +88,7 @@ public class Players {
             FileWriter fr = new FileWriter(Paths.PLAYERS_FILE, true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter pr = new PrintWriter(br);
-            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getAccuracy());
+            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+p.getCorrectGuesses());
             pr.close();
             br.close();
             fr.close();
@@ -154,11 +154,13 @@ public class Players {
 
                     String numGame = line.split(" ")[1];
                     String numComp = line.split(" ")[2];
-                    String acc = line.split(" ")[3];
+                    String numGuess = line.split(" ")[3];
+                    String numCorrect = line.split(" ")[4];
 
                     stats.add(Integer.parseInt(numGame));
                     stats.add(Integer.parseInt(numComp));
-                    stats.add(Integer.parseInt(acc));
+                    stats.add(Integer.parseInt(numGuess));
+                    stats.add(Integer.parseInt(numCorrect));
 
                 }
 

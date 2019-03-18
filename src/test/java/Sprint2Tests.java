@@ -151,14 +151,14 @@ public class Sprint2Tests {
         }
         GameController g1 = new GameController(MappingType.LETTERS, john);
         GameModel game = g1.getModel();
-        char cryptogram[] = game.getCrytogram().toCharArray();
+        char[] cryptogram = game.getCrytogram().toCharArray();
         ArrayList<Character> cryptogramChars = new ArrayList<>();
         for (char c : cryptogram) {
             if (c != ' ' && c != ',' && c != '\'' && c != '.' && !cryptogramChars.contains(Character.toLowerCase(c))) {
                 cryptogramChars.add(Character.toLowerCase(c));
             }
         }
-        char cryptogramSolution[] = game.getSolution().toCharArray();
+        char[] cryptogramSolution = game.getSolution().toCharArray();
         ArrayList<Character> cryptogramSolutionChars = new ArrayList<>();
         for (char c : cryptogramSolution) {
             if (c != ' ' && c != ',' && c != '\'' && c != '.' && !cryptogramSolutionChars.contains(Character.toLowerCase((c)))) {

@@ -130,10 +130,7 @@ public class GameModel {
     }
 
     public boolean checkIfRight(char mapping, char cipherChar) {
-        if (Character.toUpperCase(mapping) == solutionMapping.get(Character.toUpperCase(cipherChar))) {
-            return true;
-        }
-        return false;
+        return Character.toUpperCase(mapping) == solutionMapping.get(Character.toUpperCase(cipherChar));
     }
     /**
      * Method which will remove a letter from the current Mapping

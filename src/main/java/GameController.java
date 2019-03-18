@@ -62,6 +62,11 @@ public class GameController {
                     Character two = promptForChar("Enter the letter you would like to map\n=> ");
 
                     model.mapLetter(one, two, currentPlayer);
+
+                    if(model.checkIfRight(one,two)){
+                        currentPlayer.incrementCorrectGuesses();
+                        System.out.println("\nCorrect\n");
+                    }
                     validUserPlay = true;
 
                 }
@@ -140,15 +145,16 @@ public class GameController {
         }
 
         if (giveup) {
-            System.out.println("FAIL!! " + currentPlayer.getUsername() + currentPlayer.totalGuesses() + "\n");
+            System.out.println("FAIL! Better luck next time " + currentPlayer.getUsername() +"\n");
         } else {
-            System.out.println("WINNER!!\n");
+            System.out.println("WINNER!! Congratulations "+currentPlayer.getUsername()  + "\n");
+            currentPlayer.incrementCryptogramsCompleted();
         }
 
         //Update player stats
         model.updatePlayerAccuracy(currentPlayer);
-        newStats = currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses() + " " + currentPlayer.getCorrectGuesses();
 
+        newStats = currentPlayer.getUsername() + " " + currentPlayer.getCryptogramsPlayed() + " " + currentPlayer.getCryptogramsCompleted() + " " + currentPlayer.getTotalGuesses() + " " + currentPlayer.getCorrectGuesses();
         updateStats(currentPlayer, newStats);
 
         display.displaycryptOrSolution(model.getCrytogram());

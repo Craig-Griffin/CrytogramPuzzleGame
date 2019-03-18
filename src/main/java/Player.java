@@ -1,11 +1,13 @@
 public class Player {
 
     private String username;
-    private int accuracy;
-    private int totalGuesses;
+    private double accuracy;
+
     private int cryptogramsPlayed;
     private int cryptogramsCompleted;
 
+
+    private int totalGuesses;
     private int correctGuesses;
 
     /**
@@ -22,13 +24,16 @@ public class Player {
     /**
      * Constructor for a returning player who will already have statistics
      */
-    public Player(String uName, int totPlayed, int totCompleted, int acc) {
+    public Player(String uName, int totPlayed, int totCompleted, int totGuess, int totCorrect) {
         username = uName;
-        totalGuesses = 0;
+
         cryptogramsPlayed = totPlayed;
         cryptogramsCompleted = totCompleted;
-        accuracy = acc;
 
+        totalGuesses = totGuess;
+        correctGuesses = totCorrect;
+
+        accuracy = getAccuracy();
     }
 
     /**
@@ -36,7 +41,7 @@ public class Player {
      */
     public void updateAccuracy() {
         if (totalGuesses != 0) {
-            accuracy = correctGuesses / totalGuesses;
+            accuracy = ((double) correctGuesses / (double) totalGuesses)*100;
         }
     }
 
@@ -58,7 +63,9 @@ public class Player {
     /**
      * Getter Method for accuracy
      */
-    public int getAccuracy() {
+    public double getAccuracy() {
+        updateAccuracy();
+        accuracy = Math.round(accuracy * 100.0) / 100.0;
         return accuracy;
     }
 
