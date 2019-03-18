@@ -1,3 +1,8 @@
+import UI.GameView;
+import misc.MappingType;
+import misc.OneToOneMap;
+import misc.Paths;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,8 +11,6 @@ public class GameController {
     private GameModel model;
     private GameView display;
     private Player currentPlayer;
-
-    private final String FILE_ALLPLAYERS = "allplayers.txt";
 
     public GameController(MappingType type, Player p) {
         display = new GameView();
@@ -172,7 +175,7 @@ public class GameController {
     public void updateStats(Player p, String newStats) {
         try {
             // input the file content to the StringBuffer "input"
-            BufferedReader file = new BufferedReader(new FileReader(FILE_ALLPLAYERS));
+            BufferedReader file = new BufferedReader(new FileReader(Paths.PLAYERS_FILE));
             String line;
 
 
@@ -208,7 +211,7 @@ public class GameController {
             }
 
 
-            FileOutputStream fileOut = new FileOutputStream(FILE_ALLPLAYERS);
+            FileOutputStream fileOut = new FileOutputStream(Paths.PLAYERS_FILE);
             fileOut.write(forFile.getBytes());
             fileOut.close();
 

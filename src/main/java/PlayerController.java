@@ -1,10 +1,13 @@
+import UI.GameView;
+import misc.MappingType;
+import misc.OneToOneMap;
+import misc.Paths;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerController {
-
-    private final static String FILE_ALLPLAYERS = "allplayers.txt";
     private GameView display = new GameView();
     private Players allPlayers;
     private Player currentPlayer;
@@ -13,7 +16,7 @@ public class PlayerController {
     public PlayerController() throws IOException {
         allPlayers = new Players();
 
-        File file = new File(FILE_ALLPLAYERS);
+        File file = new File(Paths.PLAYERS_FILE);
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -93,7 +96,7 @@ public class PlayerController {
         boolean valid = false;
 
         try {
-            FileReader fileReader = new FileReader(FILE_ALLPLAYERS);
+            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -106,9 +109,9 @@ public class PlayerController {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
         }
 
         return valid;
@@ -227,9 +230,9 @@ public class PlayerController {
             bufferedReader.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_ALLPLAYERS + "'");
+            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
         }
 
         String solution = components.get(0);

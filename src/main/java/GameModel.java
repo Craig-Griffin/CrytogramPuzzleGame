@@ -1,4 +1,8 @@
 
+import misc.MappingType;
+import misc.OneToOneMap;
+import misc.Paths;
+
 import java.util.*;
 import java.io.*;
 
@@ -146,7 +150,7 @@ public class GameModel {
     }
 
     public void saveToDisk(Player p) throws IOException {
-        File f = new File(p.getUsername() + "_save.txt");
+        File f = new File(Paths.getPlayerSaveFilePath(p.getUsername()));
 
         if (f.exists())
             f.delete();

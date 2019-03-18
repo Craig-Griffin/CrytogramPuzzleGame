@@ -1,7 +1,9 @@
+package UI;
+
 public class GameView {
 
 
-    GameView() {
+    public GameView() {
 
     }
 

@@ -1,14 +1,14 @@
+import misc.OneToOneMap;
+import misc.Paths;
+import misc.Util;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class GenerateCrypto {
-
-    private final String FILE_QUOTES = "quotes.txt";
     private GameModel game;
     private String solution;
 
@@ -29,7 +29,7 @@ public class GenerateCrypto {
 
         try {
 
-            FileReader fileReader = new FileReader(Util.loadResource(FILE_QUOTES));
+            FileReader fileReader = new FileReader(Util.loadResource(Paths.QUOTES_FILE));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -38,12 +38,8 @@ public class GenerateCrypto {
             }
 
             bufferedReader.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + FILE_QUOTES + "'");
-        } catch (IOException ex) {
-            System.out.println("Error reading file '" + FILE_QUOTES + "'");
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         int random = new Random().nextInt(quotes.size());
