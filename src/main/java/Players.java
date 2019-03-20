@@ -2,10 +2,12 @@ import misc.Paths;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Players {
-    private ArrayList<Player> allPlayers = new ArrayList<>();
+    private List<Player> allPlayers = new ArrayList<>();
 
     /**
      * Add a new player to the file
@@ -51,7 +53,7 @@ public class Players {
         }
     }
 
-    public ArrayList<Player> getAllPlayers() {
+    public List<Player> getAllPlayers() {
         return allPlayers;
     }
 
@@ -71,13 +73,6 @@ public class Players {
 
         //Look through file for a file
         return null;
-    }
-
-    /**
-     * Getter method for allPlayers
-     */
-    public ArrayList<Player> getAllPlayersAccuracies() {
-        return allPlayers;
     }
 
     /**
@@ -178,4 +173,12 @@ public class Players {
     }
 
 
+    /**
+     *
+     * @return The top 10 players on the leaderboard, sorted by their accurracy.
+     */
+    public List<Player> getTopTen() {
+        Collections.sort(allPlayers);
+        return allPlayers.subList(0, 9);
+    }
 }

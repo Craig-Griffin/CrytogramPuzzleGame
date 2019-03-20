@@ -11,7 +11,9 @@ import java.util.Set;
  * <p>
  * An implementation of a bidirectional map using the adapter pattern on HashMap to allow bidirectional lookup between
  * keys and values.
- * Allows us to enforce one-to-one letter mappings for the cryptogram.
+ * Allows us to enforce one-to-one letter mappings for the cryptogram, as opposed to the one-to-many mapping
+ * capabilities of a standard HashMap. That is, that the Collections of both keys and values can be guaranteed to
+ * conform to a Set, not just a List.
  *
  * @param <K> Arbitrary type.
  * @param <V> Arbitrary type.

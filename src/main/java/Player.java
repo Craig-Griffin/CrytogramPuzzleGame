@@ -1,4 +1,12 @@
-public class Player {
+/**
+ * Class representing a player of all the game, and all their assotiated stats.
+ *
+ * NOTE: To allow proper sorting of the leaderboard, Player objects use the accurracy field for natural ordering. At
+ * this time, the class does not provide an implementation of equals(), however if it did in the future, it would be
+ * highly likely that a.compareTo(b) would be DIFFERENT from a.equals(b), since different players could be tied on
+ * the leaderboard.
+ */
+public class Player implements Comparable<Player>{
 
     private String username;
     private double accuracy;
@@ -107,5 +115,27 @@ public class Player {
 
     public int getCorrectGuesses() {
         return correctGuesses;
+    }
+
+    /**
+     * Implementation of compareTo to enable sorting of the leaderboard. Note that this method returning 0 does NOT
+     * imply that the two players are the same, only that they have the same accuracy.
+     *
+     * @param p Other player to compare to
+     * @return  +ve if this player has a greater accurracy than p
+     *          =0 if this player has an equal accurracy to p
+     *          -ve if this player has a lower accurracy than p
+     */
+    @Override
+    public int compareTo(Player p) {
+        double accuP = p.getAccuracy();
+
+        if(accuracy > accuP) {
+            return 1;
+        } else if(accuracy == accuP) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 }
