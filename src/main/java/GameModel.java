@@ -11,6 +11,7 @@ public class GameModel {
     private String userInput;
     private String solution;
     private int hintCount;
+    private int hintUses;
 
     //For Letters Mapping
     public OneToOneMap<Character, Character> currentMapping;
@@ -38,6 +39,7 @@ public class GameModel {
         userInput = "";
 
         hintCount = 0;
+        hintUses=0;
 
         encrpytQuote();
         userInputQuote();
@@ -56,6 +58,7 @@ public class GameModel {
         this.userInput = userInput;
 
         hintCount = 0;
+        hintUses=0;
 
         userInputQuote();
 
@@ -173,17 +176,35 @@ public class GameModel {
     public void giveHint(Player p) {
         char[] quote = getSolution().toCharArray();
 
-        for (int i = hintCount; i < quote.length; i++) {
-            Character c = quote[i];
-            hintCount++;
-            if (!c.equals(currentMapping.get(c))) {
-                currentMapping.put(solutionMapping.get(c), c);
-                userInputQuote();
-                break;
-            }
-        }
+        boolean validHint = false;
+        int i=hintCount;
 
-        System.out.println("\nHint Number: " + hintCount + "\n");
+
+
+        while(!validHint) {
+                Character c = quote[i];
+
+                if (!c.equals(currentMapping.get(c)) && userInput.toCharArray()[i] == '#') {
+
+                    currentMapping.put(solutionMapping.get(c), c);
+                    userInputQuote();
+
+                    hintCount++;
+                    i++;
+                    break;
+                }
+
+            hintCount++;
+                i++;
+
+
+
+            }
+        hintUses++;
+
+
+
+        System.out.println("\nHint Number: " + hintUses + "\n");
 
         if (userInput.equals(solution)) {
             p.incrementPlayed();

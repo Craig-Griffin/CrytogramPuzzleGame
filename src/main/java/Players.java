@@ -83,7 +83,7 @@ public class Players {
             FileWriter fr = new FileWriter(Paths.PLAYERS_FILE, true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter pr = new PrintWriter(br);
-            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+p.getCorrectGuesses());
+            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+ " "+p.getCorrectGuesses());
             pr.close();
             br.close();
             fr.close();
