@@ -1,6 +1,6 @@
 import misc.MappingType;
 import misc.OneToOneMap;
-import misc.Paths;
+import misc.FileHandler;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,15 +10,12 @@ public class PlayerController {
     private GameView display = new GameView();
     private Players allPlayers;
     private Player currentPlayer;
+    private FileHandler fileHandler;
 
 
     public PlayerController() throws IOException {
-        allPlayers = new Players();
-
-        File file = new File(Paths.PLAYERS_FILE);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
+        fileHandler = new FileHandler();
+        allPlayers = new Players(fileHandler);
     }
 
     public String promptUser(String message) {
@@ -67,7 +64,7 @@ public class PlayerController {
                 if (userNameExists(username)) {
                     ArrayList<Integer> playerStats = allPlayers.loadStatsFromFile(username);
 
-                    Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2),playerStats.get(3));
+                    Player current = new Player(username, playerStats.get(0), playerStats.get(1), playerStats.get(2), playerStats.get(3));
 
                     currentPlayer = current;
                     return current;
@@ -95,7 +92,7 @@ public class PlayerController {
         boolean valid = false;
 
         try {
-            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
+            FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -108,9 +105,9 @@ public class PlayerController {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         }
 
         return valid;
@@ -229,9 +226,9 @@ public class PlayerController {
             bufferedReader.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         }
 
         String solution = components.get(0);

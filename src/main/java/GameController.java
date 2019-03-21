@@ -1,6 +1,6 @@
 import misc.MappingType;
 import misc.OneToOneMap;
-import misc.Paths;
+import misc.FileHandler;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,12 +10,13 @@ public class GameController {
     private GameModel model;
     private GameView display;
     private Player currentPlayer;
+    private FileHandler fileHandler;
 
     public GameController(MappingType type, Player p) {
+        fileHandler = new FileHandler();
         display = new GameView();
-        model = new GameModel(type);
+        model = new GameModel(type, fileHandler);
         currentPlayer = p;
-
     }
 
     public GameController(MappingType type, Player p, String sol, String userin, String crpt, OneToOneMap<Character, Character> solMap, OneToOneMap<Character, Character> curMap) {
@@ -63,7 +64,7 @@ public class GameController {
 
                     model.mapLetter(one, two, currentPlayer);
 
-                    if(model.checkIfRight(one,two)){
+                    if (model.checkIfRight(one, two)) {
                         currentPlayer.incrementCorrectGuesses();
                         System.out.println("\nCorrect\n");
                     }
@@ -145,9 +146,9 @@ public class GameController {
         }
 
         if (giveup) {
-            System.out.println("FAIL! Better luck next time " + currentPlayer.getUsername() +"\n");
+            System.out.println("FAIL! Better luck next time " + currentPlayer.getUsername() + "\n");
         } else {
-            System.out.println("WINNER!! Congratulations "+currentPlayer.getUsername()  + "\n");
+            System.out.println("WINNER!! Congratulations " + currentPlayer.getUsername() + "\n");
             currentPlayer.incrementCryptogramsCompleted();
         }
 
@@ -180,7 +181,7 @@ public class GameController {
     public void updateStats(Player p, String newStats) {
         try {
             // input the file content to the StringBuffer "input"
-            BufferedReader file = new BufferedReader(new FileReader(Paths.PLAYERS_FILE));
+            BufferedReader file = new BufferedReader(new FileReader(fileHandler.getPlayersFile()));
             String line;
 
 
@@ -193,30 +194,30 @@ public class GameController {
 
             file.close();
 
-            for(int i=0; i<temp.size(); i++){
+            for (int i = 0; i < temp.size(); i++) {
 
                 String[] hold = temp.get(i).split(" ", 2);
                 String username = hold[0];
 
-                if (username.equals(p.getUsername())){
-                    temp.set(i,newStats);
+                if (username.equals(p.getUsername())) {
+                    temp.set(i, newStats);
                 }
             }
 
 
             String newText = temp.toString();
-            newText = newText.substring(1, newText.length()-1);
+            newText = newText.substring(1, newText.length() - 1);
             String[] data = newText.split(", ");
 
 
-            String forFile="";
+            String forFile = "";
 
-            for(int x=0; x<data.length; x++){
+            for (int x = 0; x < data.length; x++) {
                 forFile = forFile + data[x] + "\n";
             }
 
 
-            FileOutputStream fileOut = new FileOutputStream(Paths.PLAYERS_FILE);
+            FileOutputStream fileOut = new FileOutputStream(fileHandler.getPlayersFile());
             fileOut.write(forFile.getBytes());
             fileOut.close();
 
@@ -224,7 +225,6 @@ public class GameController {
             System.out.println("Problem reading file.");
         }
     }
-
 
 
 }

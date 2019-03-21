@@ -21,11 +21,11 @@ public class Util {
      * @param path Path to the file, where "src/main/resources" is the root. So "src/main/resources/foo/bar.txt" is "foo/bar.txt"
      * @return The File object
      */
-    public static File loadResource(String path) throws FileNotFoundException {
+    static File loadResource(String path) throws FileNotFoundException {
         File file;
         URL url = Util.class.getClassLoader().getResource(path);
 
-        if(url == null) {
+        if (url == null) {
             throw new FileNotFoundException("Resource path '" + path + "' produced a null resource.");
         } else {
             file = new File(url.getFile());
@@ -37,10 +37,10 @@ public class Util {
 
     private static HashSet<Character> populateAlphabet() {
         HashSet<Character> alphabet = new HashSet<>();
-        for(char c = 'A'; c <= 'Z'; c++) {
+        for (char c = 'A'; c <= 'Z'; c++) {
             alphabet.add(c);
         }
         return alphabet;
     }
-    
+
 }

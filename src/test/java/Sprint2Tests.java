@@ -1,6 +1,6 @@
 
 import misc.MappingType;
-import misc.Paths;
+import misc.FileHandler;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
@@ -15,12 +15,13 @@ public class Sprint2Tests {
     private File playerFile;
     private Players allPlayers;
     private PlayerController pController;
-    private GameController gController;
+    private FileHandler fileHandler;
 
     @BeforeAll
     static void doInitially() throws IOException {
+        FileHandler fileHandler = new FileHandler();
         File savedPlayerList = new File(backupPath);
-        File currentPlayerList = new File(Paths.PLAYERS_FILE);
+        File currentPlayerList = fileHandler.getPlayersFile();
         if (currentPlayerList.exists()) {
             currentPlayerList.renameTo(savedPlayerList);
         }
@@ -28,8 +29,9 @@ public class Sprint2Tests {
 
     @AfterAll
     static void doAfterAll() {
+        FileHandler fileHandler = new FileHandler();
         File savedPlayerList = new File(backupPath);
-        File currentPlayerList = new File(Paths.PLAYERS_FILE);
+        File currentPlayerList = fileHandler.getPlayersFile();
         if (savedPlayerList.exists()) {
             currentPlayerList.delete();
             savedPlayerList.renameTo(currentPlayerList);
@@ -38,12 +40,14 @@ public class Sprint2Tests {
 
     @BeforeEach
     void setUpEach() throws IOException {
-        File currentPlayerList = new File(Paths.PLAYERS_FILE);
+        pController = new PlayerController();
+        fileHandler = new FileHandler();
+        allPlayers = new Players(fileHandler);
+
+        File currentPlayerList = fileHandler.getPlayersFile();
         if (currentPlayerList.exists()) {
             currentPlayerList.delete();
         }
-        pController = new PlayerController();
-        allPlayers = new Players();
     }
 
     @AfterEach
@@ -59,9 +63,9 @@ public class Sprint2Tests {
     public void makeSureSaveIsWorking() {
         //Generate a new Game and player
         Player john = new Player(username);
-        GameModel game = new GameModel(MappingType.LETTERS);
+        GameModel game = new GameModel(MappingType.LETTERS, fileHandler);
 
-        playerFile = new File(Paths.getPlayerSaveFilePath(username));
+        playerFile = fileHandler.getPlayerSaveFile(username);
 
         //perform a save
         try {
@@ -82,7 +86,7 @@ public class Sprint2Tests {
 
         //generate new game
         Player john = new Player(username);
-        GameModel game = new GameModel(MappingType.LETTERS);
+        GameModel game = new GameModel(MappingType.LETTERS, fileHandler);
         //make a random mapping to check loading properly
         game.mapLetter('e', 'l', john);
         String mappingBeforeSaveLoad = game.getCurrentMapping();
@@ -220,14 +224,11 @@ public class Sprint2Tests {
         john.incrementPlayed();
         john.incrementCryptogramsCompleted();
         john.updateAccuracy();
-        try {
-            allPlayers.removePlayer(username);
-            allPlayers.writeUser(john);
-            allPlayers.writeUser(new Player("FReed"));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        allPlayers.removePlayer(username);
+        allPlayers.writeUser(john);
+        allPlayers.writeUser(new Player("FReed"));
+
         john.incrementCryptogramsCompleted();
         assertEquals(2, john.getCryptogramsCompleted());
         stats = allPlayers.loadStatsFromFile(username);

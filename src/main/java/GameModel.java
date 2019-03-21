@@ -1,20 +1,22 @@
 
 import misc.MappingType;
 import misc.OneToOneMap;
-import misc.Paths;
+import misc.FileHandler;
 
 import java.util.*;
 import java.io.*;
 
 public class GameModel {
+    private FileHandler fileHandler;
+
     private String crytogram;
     private String userInput;
     private String solution;
     private int hintCount;
 
     //For Letters Mapping
-    public OneToOneMap<Character, Character> currentMapping;
-    public OneToOneMap<Character, Character> solutionMapping;
+    private OneToOneMap<Character, Character> currentMapping;
+    private OneToOneMap<Character, Character> solutionMapping;
 
     private MappingType lettersOrNums;
 
@@ -25,9 +27,10 @@ public class GameModel {
      *
      * @param type
      */
-    public GameModel(MappingType type) {
+    public GameModel(MappingType type, FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
 
-        GenerateCrypto buildCrypto = new GenerateCrypto();
+        GenerateCrypto buildCrypto = new GenerateCrypto(fileHandler);
 
         solution = buildCrypto.getSolution();
         lettersOrNums = type;
@@ -132,6 +135,7 @@ public class GameModel {
     public boolean checkIfRight(char mapping, char cipherChar) {
         return Character.toUpperCase(mapping) == solutionMapping.get(Character.toUpperCase(cipherChar));
     }
+
     /**
      * Method which will remove a letter from the current Mapping
      */
@@ -147,7 +151,7 @@ public class GameModel {
     }
 
     public void saveToDisk(Player p) throws IOException {
-        File f = new File(Paths.getPlayerSaveFilePath(p.getUsername()));
+        File f = fileHandler.getPlayerSaveFile(p.getUsername());
 
         if (f.exists())
             f.delete();
@@ -231,7 +235,7 @@ public class GameModel {
     }
 
 
-    void loadFromFile(){ //workaround being used in PlayerController, hard to refactor
+    void loadFromFile() { //workaround being used in PlayerController, hard to refactor
     }
 
 

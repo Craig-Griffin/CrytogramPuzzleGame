@@ -1,4 +1,4 @@
-import misc.Paths;
+import misc.FileHandler;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,6 +8,12 @@ import java.util.List;
 
 public class Players {
     private List<Player> allPlayers = new ArrayList<>();
+    private FileHandler fileHandler;
+
+    public Players(FileHandler fileHandler) {
+        allPlayers = new ArrayList<>();
+        this.fileHandler = fileHandler;
+    }
 
     /**
      * Add a new player to the file
@@ -26,9 +32,9 @@ public class Players {
     /**
      * Remove a player from the system
      */
-    public void removePlayer(String p) throws IOException {
+    public void removePlayer(String p) {
         try {
-            File current = new File(Paths.PLAYERS_FILE);
+            File current = fileHandler.getPlayersFile();
             File temp = new File("temp.txt");
 
             FileReader fr = new FileReader(current);
@@ -45,7 +51,7 @@ public class Players {
             bw.close();
             br.close();
             current.delete();
-            temp.renameTo(new File(Paths.PLAYERS_FILE));
+            temp.renameTo(fileHandler.getPlayersFile());
             allPlayers.remove(p);
 
         } catch (IOException ex) {
@@ -78,21 +84,21 @@ public class Players {
     /**
      * Method which will  write a players data to the file
      */
-    public void writeUser(Player p) throws IOException {
+    public void writeUser(Player p) {
         try {
-            FileWriter fr = new FileWriter(Paths.PLAYERS_FILE, true);
+            FileWriter fr = new FileWriter(fileHandler.getPlayersFile(), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter pr = new PrintWriter(br);
-            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+p.getCorrectGuesses());
+            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+ " " + p.getCorrectGuesses());
             pr.close();
             br.close();
             fr.close();
 
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         }
     }
 
@@ -106,7 +112,7 @@ public class Players {
 
         try {
 
-            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
+            FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -120,9 +126,9 @@ public class Players {
             }
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
 
 
         }
@@ -138,12 +144,22 @@ public class Players {
 
         try {
 
-            FileReader fileReader = new FileReader(Paths.PLAYERS_FILE);
+            FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            int lineCount = 0;
             while ((line = bufferedReader.readLine()) != null) {
 
-                String username = line.split(" ")[0];
+                String[] parsedLine = line.split(" ");
+
+                if(parsedLine.length != 5) {
+                    System.err.println("Error parsing line " + lineCount + " of the players file:");
+                    System.out.println(line);
+                    lineCount++;
+                    continue;
+                }
+
+                String username = parsedLine[0];
 
                 if (username.equals(p)) {
 
@@ -159,13 +175,14 @@ public class Players {
 
                 }
 
+                lineCount++;
             }
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + Paths.PLAYERS_FILE + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
 
         }
         return stats;

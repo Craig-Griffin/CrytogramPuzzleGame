@@ -1,5 +1,5 @@
 import misc.OneToOneMap;
-import misc.Paths;
+import misc.FileHandler;
 import misc.Util;
 
 import java.io.BufferedReader;
@@ -11,8 +11,11 @@ import java.util.Random;
 public class GenerateCrypto {
     private GameModel game;
     private String solution;
+    private FileHandler fileHandler;
 
-    public GenerateCrypto() {
+    public GenerateCrypto(FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
+
         solution = loadRandomQuote();
 
     }
@@ -28,8 +31,7 @@ public class GenerateCrypto {
         ArrayList<String> quotes = new ArrayList<>();
 
         try {
-
-            FileReader fileReader = new FileReader(Util.loadResource(Paths.QUOTES_FILE));
+            FileReader fileReader = new FileReader(fileHandler.getQuotesFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while ((line = bufferedReader.readLine()) != null) {

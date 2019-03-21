@@ -1,17 +1,24 @@
+import misc.FileHandler;
 import misc.MappingType;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
+	private GameModel game;
 
+
+	@BeforeAll
+	void init() {
+		game = new GameModel(MappingType.LETTERS, new FileHandler());
+	}
 
 	/**
 	 * This will test 
 	 */
 	@Test
 	void makeSureAnEmptyUserStringOnlyContainsHashTagsForLetters() {
-		GameModel game = new GameModel(MappingType.LETTERS);
 		char[] userInput = game.getUserInput().toCharArray();
 
 		for(char c: userInput) {
@@ -25,13 +32,11 @@ class GameTest {
 	 */
 	@Test
 	void makeSureSolutionAndCrytogramAreNotTheSame() {
-		GameModel game = new GameModel(MappingType.LETTERS);
 		assertTrue(!game.getCrytogram().equals(game.getSolution()) );
 	}
 
 	@Test
 	void removeLetter() {
-		GameModel game = new GameModel(MappingType.LETTERS);
 		Player john = new Player("john");
 		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == '#');
 		game.mapLetter(Character.toLowerCase(game.getCrytogram().charAt(2)), Character.toLowerCase(game.getSolution().charAt(2)), john);
@@ -42,7 +47,6 @@ class GameTest {
 
 	@Test
 	void addLetter() {
-		GameModel game = new GameModel(MappingType.LETTERS);
 		Player john = new Player("john");
 		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == '#');
 		game.mapLetter(Character.toLowerCase(game.getCrytogram().charAt(2)), 'a', john);
@@ -54,7 +58,6 @@ class GameTest {
 
 	@Test
 	void autocomplete() {
-		GameModel game = new GameModel(MappingType.LETTERS);
 		Player john = new Player("john");
 		assertNotEquals(game.getUserInput(), game.getSolution());
 		game.autocomplete(john);
