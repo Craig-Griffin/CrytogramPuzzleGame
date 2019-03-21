@@ -13,6 +13,7 @@ public class GameModel {
     private String userInput;
     private String solution;
     private int hintCount;
+    private int hintUses;
 
     //For Letters Mapping
     private OneToOneMap<Character, Character> currentMapping;
@@ -41,6 +42,7 @@ public class GameModel {
         userInput = "";
 
         hintCount = 0;
+        hintUses=0;
 
         encrpytQuote();
         userInputQuote();
@@ -59,6 +61,7 @@ public class GameModel {
         this.userInput = userInput;
 
         hintCount = 0;
+        hintUses=0;
 
         userInputQuote();
 
@@ -177,17 +180,35 @@ public class GameModel {
     public void giveHint(Player p) {
         char[] quote = getSolution().toCharArray();
 
-        for (int i = hintCount; i < quote.length; i++) {
-            Character c = quote[i];
-            hintCount++;
-            if (!c.equals(currentMapping.get(c))) {
-                currentMapping.put(solutionMapping.get(c), c);
-                userInputQuote();
-                break;
-            }
-        }
+        boolean validHint = false;
+        int i=hintCount;
 
-        System.out.println("\nHint Number: " + hintCount + "\n");
+
+
+        while(!validHint) {
+                Character c = quote[i];
+
+                if (!c.equals(currentMapping.get(c)) && userInput.toCharArray()[i] == '#') {
+
+                    currentMapping.put(solutionMapping.get(c), c);
+                    userInputQuote();
+
+                    hintCount++;
+                    i++;
+                    break;
+                }
+
+            hintCount++;
+                i++;
+
+
+
+            }
+        hintUses++;
+
+
+
+        System.out.println("\nHint Number: " + hintUses + "\n");
 
         if (userInput.equals(solution)) {
             p.incrementPlayed();
@@ -197,18 +218,21 @@ public class GameModel {
     }
 
 
-    public void getFrequencies() {
-        String cryto = getCrytogram();
-        HashMap<Character, Integer> temp = new HashMap<>();
+    public String getFrequencies(String cryptoOrSolution) {
 
-        for (Character c : cryto.toCharArray()) {
+        HashMap<Character, String> temp = new HashMap<>();
+
+        for (Character c : cryptoOrSolution.toCharArray()) {
             if (c != ' ' && c != '.' && c != ',') {
-                int currentCount = countChar(cryto, c);
-                temp.put(c, currentCount);
+                Double currentCount = (double)countChar(cryptoOrSolution, c) / cryptoOrSolution.length() * 100;
+                currentCount = Math.round(currentCount* 100.0) / 100.0;
+
+
+                temp.put(c, currentCount.toString() + "%");
             }
         }
 
-        System.out.println("\nLetter Frequencies: " + temp.toString() + "\n");
+        return temp.toString();
     }
 
     public void addGuess(Player p) {

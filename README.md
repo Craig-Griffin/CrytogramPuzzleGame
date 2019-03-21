@@ -10,7 +10,7 @@ Here is how far we are through the project, and how far we still have to go.
 
 + ~~As a player I want to be able to undo a letter so I can play the cryptogram~~
 
-Still some bugs in this stage but it might be close enough for the purposes of the task.
+Still some bugs in this stage but it might be close enough for the purposes of the task. Mark given: `13/23`. A large amount of marks where lost for lack of JUnit testing. 
 
 
 #### Sprint Two
@@ -42,8 +42,11 @@ Still some bugs in this stage but it might be close enough for the purposes of t
 ##### TO-DO 
 + ~~Most important - Work on a method which can replace a line in a file~~
 + ~~Save/Load a game~~
-+ This sprint is almost done, Need to fix accuracy, which is currently working but not returning the correct numebr.
-+ We need to create several JUnit Tests so we don't get bad marks again!
++ ~~This sprint is almost done, Need to fix accuracy, which is currently working but not returning the correct numebr.~~
++ ~~We need to create several JUnit Tests so we don't get bad marks again!~~
++ Update a players guesses before they exit the game.
++ Improve robustness (Catch if a file has been tampered with/ corrupted)
++ Imrprove usability of the game
 
 
 
@@ -56,6 +59,13 @@ Still some bugs in this stage but it might be close enough for the purposes of t
      +Singleton design pattern thing?
 
 + ~~As a player I want to be able to get a hint for a letter so I can solve the cryptogram~~
+
+##### TO-DO 
++ Write the report
++ More JUnit Testing for the three new user stories 
++ Refactor code to achieve better code quality 
+
+
 
 
 #### Things that would be nice to add 

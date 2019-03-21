@@ -93,7 +93,8 @@ public class GameController {
 
                 //Get frequency for each letter
                 else if (userPlay.equals('f') || userPlay.equals('F')) {
-                    model.getFrequencies();
+                    //System.out.println("\nLetter Frequency in Solution: " + model.getFrequencies(model.getSolution()));
+                    System.out.println("\nLetter Frequency in Cryptogram: " + model.getFrequencies(model.getCrytogram()) +"\n");
                     validUserPlay = true;
                     model.addGuess(currentPlayer);
                 }
