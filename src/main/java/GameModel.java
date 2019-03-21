@@ -193,18 +193,21 @@ public class GameModel {
     }
 
 
-    public void getFrequencies() {
-        String cryto = getCrytogram();
-        HashMap<Character, Integer> temp = new HashMap<>();
+    public String getFrequencies(String cryptoOrSolution) {
 
-        for (Character c : cryto.toCharArray()) {
+        HashMap<Character, String> temp = new HashMap<>();
+
+        for (Character c : cryptoOrSolution.toCharArray()) {
             if (c != ' ' && c != '.' && c != ',') {
-                int currentCount = countChar(cryto, c);
-                temp.put(c, currentCount);
+                Double currentCount = (double)countChar(cryptoOrSolution, c) / cryptoOrSolution.length() * 100;
+                currentCount = Math.round(currentCount* 100.0) / 100.0;
+
+
+                temp.put(c, currentCount.toString() + "%");
             }
         }
 
-        System.out.println("\nLetter Frequencies: " + temp.toString() + "\n");
+        return temp.toString();
     }
 
     public void addGuess(Player p) {
