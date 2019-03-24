@@ -42,7 +42,7 @@
                     <arguments>
                         <argument>-classpath</argument>
                         <classpath/>
-                        <argument>com.example.Main</argument>
+                        <argument>App</argument>
                     </arguments>
                 </configuration>
             </plugin>
