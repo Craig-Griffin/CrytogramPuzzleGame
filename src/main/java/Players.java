@@ -64,7 +64,6 @@ public class Players {
     }
 
 
-
     /**
      * ??
      */
@@ -91,7 +90,7 @@ public class Players {
             FileWriter fr = new FileWriter(fileHandler.getPlayersFile(), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter pr = new PrintWriter(br);
-            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses()+ " " + p.getCorrectGuesses());
+            pr.println(p.getUsername() + " " + p.getCryptogramsPlayed() + " " + p.getCryptogramsCompleted() + " " + p.getTotalGuesses() + " " + p.getCorrectGuesses());
             pr.close();
             br.close();
             fr.close();
@@ -154,9 +153,7 @@ public class Players {
 
                 String[] parsedLine = line.split(" ");
 
-                if(parsedLine.length != 5) {
-                    System.err.println("Error parsing line " + lineCount + " of the players file:");
-                    System.out.println(line);
+                if (parsedLine.length != 5) {
                     lineCount++;
                     continue;
                 }
@@ -191,17 +188,16 @@ public class Players {
 
     }
 
+    /**
+     * @return A sorted list of Player objects in
+     */
     public List<Player> getTopTen() {
-
         List<Player> Leaderboard = LoadAllPlayers();
-
 
         Collections.sort(Leaderboard);
 
-
-
-        if (Leaderboard.size() > 11)
-            return Leaderboard.subList(0, 11);
+        if (Leaderboard.size() > 10)
+            return Leaderboard.subList(0, 10);
         else
             return Leaderboard.subList(0, Leaderboard.size());
     }
@@ -211,24 +207,19 @@ public class Players {
         ArrayList<Player> temp = new ArrayList<>();
 
         try {
-
             FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
 
-
             while ((line = bufferedReader.readLine()) != null) {
-
-
-                temp.add(new Player(line.split(" ")[0],Integer.parseInt(line.split(" ")[1]),Integer.parseInt(line.split(" ")[2]),Integer.parseInt(line.split(" ")[3]),Integer.parseInt(line.split(" ")[4])));
+                String[] tokens = line.split(" ");
+                if(tokens.length != 5) continue;
+                temp.add(new Player(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
             }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return temp;
     }
-    }
+}

@@ -169,7 +169,7 @@ public class PlayerController {
 
 
                 System.out.println("\n**LeaderBoard**\npos\tUsername\tAccuracy");
-                for (int i = leaderboard.size() - 1; i > 0; i--) {
+                for (int i = 0; i < leaderboard.size(); i++) {
 
                     System.out.println(pos + ": " + leaderboard.get(i).getUsername() + "\t" + leaderboard.get(i).getAccuracy()+"%");
                     pos++;
@@ -240,9 +240,9 @@ public class PlayerController {
             bufferedReader.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
+            System.out.println("Unable to open file '" + fileHandler.getPlayerSaveFile(currentP.getUsername()).getAbsolutePath() + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + fileHandler.getPlayersFile().getAbsolutePath() + "'");
+            System.out.println("Error reading file '" + fileHandler.getPlayerSaveFile(currentP.getUsername()).getAbsolutePath() + "'");
         }
 
         String solution = components.get(0);

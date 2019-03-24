@@ -130,12 +130,6 @@ public class Player implements Comparable<Player>{
     public int compareTo(Player p) {
         double accuP = p.getAccuracy();
 
-        if(accuracy > accuP) {
-            return 1;
-        } else if(accuracy == accuP) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return (int) Math.round(accuP - accuracy);
     }
 }
