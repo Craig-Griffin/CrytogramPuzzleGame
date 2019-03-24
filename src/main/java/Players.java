@@ -200,8 +200,8 @@ public class Players {
 
 
 
-        if (Leaderboard.size() > 9)
-            return Leaderboard.subList(0, 9);
+        if (Leaderboard.size() > 11)
+            return Leaderboard.subList(0, 11);
         else
             return Leaderboard.subList(0, Leaderboard.size());
     }
@@ -217,17 +217,8 @@ public class Players {
             String line = null;
 
 
-            int lineCount = 0;
             while ((line = bufferedReader.readLine()) != null) {
 
-                String[] parsedLine = line.split(" ");
-
-                if (parsedLine.length != 5) {
-                    System.err.println("Error parsing line " + lineCount + " of the players file:");
-                    System.out.println(line);
-                    lineCount++;
-                    continue;
-                }
 
                 temp.add(new Player(line.split(" ")[0],Integer.parseInt(line.split(" ")[1]),Integer.parseInt(line.split(" ")[2]),Integer.parseInt(line.split(" ")[3]),Integer.parseInt(line.split(" ")[4])));
             }
