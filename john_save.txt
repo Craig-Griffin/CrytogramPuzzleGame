@@ -28,3 +28,13 @@ FIGHT TILL THE LAST GASP.
 EQWOY YQII YOR ICJY WCJL.
 {A=C, B=S, C=F, D=T, E=R, F=E, G=W, H=O, I=Q, J=U, K=D, L=I, M=N, N=K, O=B, P=L, Q=V, R=X, S=J, T=Y, U=A, V=G, W=M, X=H, Y=P, Z=Z,  = , '=', ,=,, .=.}
 {A=#, B=#, C=#, D=#, E=#, F=#, G=#, H=#, I=#, J=#, K=#, L=#, M=#, N=#, O=#, P=#, Q=#, R=#, S=#, T=#, U=#, V=#, W=#, X=#, Y=#, Z=#,  = , '=', ,=,, .=.}
+STAY HUNGRY. STAY FOOLISH.
+#### #L####. #### #######.
+AWKU FEMRGU. AWKU TYYOPAF.
+{A=K, B=J, C=C, D=Z, E=L, F=T, G=R, H=F, I=P, J=I, K=H, L=O, M=S, N=M, O=Y, P=V, Q=B, R=G, S=A, T=W, U=E, V=N, W=X, X=D, Y=U, Z=Q,  = , '=', ,=,, .=.}
+{A=#, B=#, C=#, D=#, E=L, F=#, G=#, H=#, I=#, J=#, K=#, L=#, M=#, N=#, O=#, P=#, Q=#, R=#, S=#, T=#, U=#, V=#, W=#, X=#, Y=#, Z=#,  = , '=', ,=,, .=.}
+AND SO THE ADVENTURE BEGINS.
+### ## ### ######### ######.
+WUL SX CJQ WLDQUCBOQ VQAHUS.
+{A=W, B=V, C=E, D=L, E=Q, F=K, G=A, H=J, I=H, J=Y, K=M, L=T, M=N, N=U, O=X, P=Z, Q=I, R=O, S=S, T=C, U=B, V=D, W=F, X=G, Y=P, Z=R,  = , '=', ,=,, .=.}
+{A=#, B=#, C=#, D=#, E=#, F=#, G=#, H=#, I=#, J=#, K=#, L=#, M=#, N=#, O=#, P=#, Q=#, R=#, S=#, T=#, U=#, V=#, W=#, X=#, Y=#, Z=#,  = , '=', ,=,, .=.}

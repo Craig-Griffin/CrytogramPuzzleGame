@@ -63,6 +63,8 @@ public class Players {
         return allPlayers;
     }
 
+
+
     /**
      * ??
      */
@@ -189,13 +191,16 @@ public class Players {
 
     }
 
-
-    /**
-     *
-     * @return The top 10 players on the leaderboard, sorted by their accurracy.
-     */
     public List<Player> getTopTen() {
         Collections.sort(allPlayers);
-        return allPlayers.subList(0, 9);
+
+        if (allPlayers.size() > 9)
+            return allPlayers.subList(0, 9);
+        else
+            return allPlayers.subList(0, allPlayers.size());
     }
+
+
+
+
 }

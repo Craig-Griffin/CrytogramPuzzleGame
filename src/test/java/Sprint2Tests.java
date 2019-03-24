@@ -238,5 +238,44 @@ public class Sprint2Tests {
 
 
     }
+    /* User Story 9 (?) */
+    @Test
+    public void makeSureLeaderBoardDisplaysCorrectly() {
+        Player john = new Player(username);
+        Player reece = new Player(username);
+        Player o = new Player(username);
+        Player a = new Player(username);
+        Player b = new Player(username);
+        Player c = new Player(username);
+        Player d = new Player(username);
+        try {
+            allPlayers.addPlayer(john);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GameController g1 = new GameController(MappingType.LETTERS, john);
+        g1.getModel().autocomplete(john);
+        GameController g2 = new GameController(MappingType.LETTERS, reece);
+        g2.getModel().autocomplete(reece);
+        g2.getModel().autocomplete(reece);
+        g2.getModel().autocomplete(reece);
+        g2.getModel().autocomplete(reece);
+        GameController g3 = new GameController(MappingType.LETTERS, o);
+        g3.getModel().autocomplete(o);
+        GameController g4 = new GameController(MappingType.LETTERS, a);
+        g4.getModel().autocomplete(a);
+        GameController g5 = new GameController(MappingType.LETTERS, b);
+        g5.getModel().autocomplete(b);
+        GameController g6 = new GameController(MappingType.LETTERS, c);
+        g6.getModel().autocomplete(c);
+        GameController g7 = new GameController(MappingType.LETTERS, d);
+        g7.getModel().autocomplete(d);
+
+
+
+
+
+
+    }
 
 }

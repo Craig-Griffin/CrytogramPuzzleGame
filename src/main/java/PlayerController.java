@@ -4,6 +4,7 @@ import misc.FileHandler;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PlayerController {
@@ -162,8 +163,13 @@ public class PlayerController {
 
             //Leader Board
             if (choice.equals("b") || choice.equals("B")) {
-                System.out.println("View Leader Board");
+                List<Player> leaderboard = allPlayers.getTopTen();
+                for (int i = 0; i < leaderboard.size(); i++) {
+                    int j = i+1;
+                System.out.println(j + ": "  + leaderboard.get(i).getUsername());
+                }
             }
+
 
             //Remove a Player
             if (choice.equals("r") || choice.equals("R")) {
