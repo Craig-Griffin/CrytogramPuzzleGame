@@ -38,7 +38,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>App</mainClass>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>com.example.Main</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
