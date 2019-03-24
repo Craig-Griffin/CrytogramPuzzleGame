@@ -218,7 +218,7 @@ public class GameModel {
     }
 
 
-    public String getFrequencies(String cryptoOrSolution) {
+    public HashMap<Character, String> getFrequencies(String cryptoOrSolution) {
 
         HashMap<Character, String> temp = new HashMap<>();
 
@@ -232,7 +232,7 @@ public class GameModel {
             }
         }
 
-        return temp.toString();
+        return temp;
     }
 
     public void addGuess(Player p) {

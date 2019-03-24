@@ -1,9 +1,11 @@
 import misc.MappingType;
 import misc.OneToOneMap;
 import misc.FileHandler;
+import misc.Util;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GameController {
@@ -93,8 +95,11 @@ public class GameController {
 
                 //Get frequency for each letter
                 else if (userPlay.equals('f') || userPlay.equals('F')) {
-                    //System.out.println("\nLetter Frequency in Solution: " + model.getFrequencies(model.getSolution()));
-                    System.out.println("\nLetter Frequency in Cryptogram: " + model.getFrequencies(model.getCrytogram()) +"\n");
+                    HashMap<Character, String> cryptoFreq = model.getFrequencies(model.getCrytogram());
+                    HashMap<Character, String> englishFreq = new HashMap<>();
+
+                    System.out.println("\nLetter Frequency in Cryptogram: " + cryptoFreq.toString());
+                    System.out.println("Average Engligh Letter Frequencies: " + Util.getEnglishLetterFreqs().toString());
                     validUserPlay = true;
                     model.addGuess(currentPlayer);
                 }
