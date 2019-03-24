@@ -1,18 +1,28 @@
 import misc.FileHandler;
 import misc.MappingType;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class GameTest {
-	private GameModel game;
+	private static GameModel game;
 
 
 	@BeforeAll
-	void init() {
+	static void init() {
 		game = new GameModel(MappingType.LETTERS, new FileHandler());
 	}
+
+	@AfterEach
+    void cleanup() {
+        File testplayer = new File("testplayer_save.txt");
+        testplayer.delete();
+    }
 
 	/**
 	 * This will test 
@@ -37,8 +47,7 @@ class GameTest {
 
 	@Test
 	void removeLetter() {
-		Player john = new Player("john");
-		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == '#');
+		Player john = new Player("testplayer");
 		game.mapLetter(Character.toLowerCase(game.getCrytogram().charAt(2)), Character.toLowerCase(game.getSolution().charAt(2)), john);
 		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == Character.toLowerCase(game.getSolution().charAt(2)));
 		game.removeLetter(Character.toLowerCase(game.getCrytogram().charAt(2)));
@@ -47,8 +56,7 @@ class GameTest {
 
 	@Test
 	void addLetter() {
-		Player john = new Player("john");
-		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == '#');
+		Player john = new Player("testplayer");
 		game.mapLetter(Character.toLowerCase(game.getCrytogram().charAt(2)), 'a', john);
 		assertTrue(Character.toLowerCase(game.getUserInput().charAt(2)) == 'a');
 		//checking for overwriting mapping (prints message in console)
@@ -58,7 +66,7 @@ class GameTest {
 
 	@Test
 	void autocomplete() {
-		Player john = new Player("john");
+		Player john = new Player("testplayer");
 		assertNotEquals(game.getUserInput(), game.getSolution());
 		game.autocomplete(john);
 		assertEquals(game.getUserInput(), game.getSolution());
