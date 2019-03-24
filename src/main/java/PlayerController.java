@@ -164,10 +164,18 @@ public class PlayerController {
             //Leader Board
             if (choice.equals("b") || choice.equals("B")) {
                 List<Player> leaderboard = allPlayers.getTopTen();
-                for (int i = 0; i < leaderboard.size(); i++) {
-                    int j = i+1;
-                System.out.println(j + ": "  + leaderboard.get(i).getUsername());
+
+                int pos = 1;
+
+
+                System.out.println("\n**LeaderBoard**\npos\tUsername\tAccuracy");
+                for (int i = leaderboard.size() - 1; i > 0; i--) {
+
+                    System.out.println(pos + ": " + leaderboard.get(i).getUsername() + "\t" + leaderboard.get(i).getAccuracy()+"%");
+                    pos++;
                 }
+
+                System.out.println();
             }
 
 

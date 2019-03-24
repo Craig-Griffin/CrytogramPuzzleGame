@@ -192,15 +192,52 @@ public class Players {
     }
 
     public List<Player> getTopTen() {
-        Collections.sort(allPlayers);
 
-        if (allPlayers.size() > 9)
-            return allPlayers.subList(0, 9);
+        List<Player> Leaderboard = LoadAllPlayers();
+
+
+        Collections.sort(Leaderboard);
+
+
+
+        if (Leaderboard.size() > 9)
+            return Leaderboard.subList(0, 9);
         else
-            return allPlayers.subList(0, allPlayers.size());
+            return Leaderboard.subList(0, Leaderboard.size());
     }
 
+    private ArrayList<Player> LoadAllPlayers() {
+
+        ArrayList<Player> temp = new ArrayList<>();
+
+        try {
+
+            FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
 
 
+            int lineCount = 0;
+            while ((line = bufferedReader.readLine()) != null) {
 
-}
+                String[] parsedLine = line.split(" ");
+
+                if (parsedLine.length != 5) {
+                    System.err.println("Error parsing line " + lineCount + " of the players file:");
+                    System.out.println(line);
+                    lineCount++;
+                    continue;
+                }
+
+                temp.add(new Player(line.split(" ")[0],Integer.parseInt(line.split(" ")[1]),Integer.parseInt(line.split(" ")[2]),Integer.parseInt(line.split(" ")[3]),Integer.parseInt(line.split(" ")[4])));
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return temp;
+    }
+    }
