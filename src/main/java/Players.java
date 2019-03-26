@@ -7,17 +7,18 @@ import java.util.List;
 
 
 public class Players {
-    private List<Player> allPlayers = new ArrayList<>();
+    private List < Player > allPlayers;
     private FileHandler fileHandler;
 
+
+    /*Players Constructor*/
     public Players(FileHandler fileHandler) {
-        allPlayers = new ArrayList<>();
+        allPlayers = new ArrayList < > ();
         this.fileHandler = fileHandler;
     }
 
-    /**
-     * Add a new player to the file
-     */
+
+    /*Add a new player to the file*/
     public void addPlayer(Player p) throws IOException {
         if (validateUserName(p)) {
             writeUser(p);
@@ -29,9 +30,8 @@ public class Players {
 
     }
 
-    /**
-     * Remove a player from the system
-     */
+
+    /* Remove a player from the system*/
     public void removePlayer(String p) {
         try {
             File current = fileHandler.getPlayersFile();
@@ -59,32 +59,14 @@ public class Players {
         }
     }
 
-    public List<Player> getAllPlayers() {
+
+    /*Getter for AllPlayers*/
+    public List < Player > getAllPlayers() {
         return allPlayers;
     }
 
 
-    /**
-     * ??
-     */
-    public void savePlayer(Player p) {
-
-        //Save player to file
-
-    }
-
-    /**
-     * Find a player on the system
-     */
-    public Player findPlayer() {
-
-        //Look through file for a file
-        return null;
-    }
-
-    /**
-     * Method which will  write a players data to the file
-     */
+    /* Method which will  write a players data to the file*/
     public void writeUser(Player p) {
         try {
             FileWriter fr = new FileWriter(fileHandler.getPlayersFile(), true);
@@ -104,9 +86,7 @@ public class Players {
     }
 
 
-    /**
-     * Helper method which will ensure that no duplicate usernames can exist within the file
-     */
+    /* Helper method which will ensure that no duplicate usernames can exist within the file*/
     public boolean validateUserName(Player p) {
         String line = " ";
         boolean valid = true;
@@ -136,12 +116,11 @@ public class Players {
         return valid;
     }
 
-    /**
-     * Get the details of a player which will be used to generate an object
-     */
-    public ArrayList<Integer> loadStatsFromFile(String p) {
+
+    /* Get the details of a player which will be used to generate an object*/
+    public ArrayList < Integer > loadStatsFromFile(String p) {
         String line = null;
-        ArrayList<Integer> stats = new ArrayList<>();
+        ArrayList < Integer > stats = new ArrayList < > ();
 
         try {
 
@@ -188,11 +167,9 @@ public class Players {
 
     }
 
-    /**
-     * @return A sorted list of Player objects in
-     */
-    public List<Player> getTopTen() {
-        List<Player> Leaderboard = LoadAllPlayers();
+    /*Getter Method for Top Ten Players*/
+    public List < Player > getTopTen() {
+        List < Player > Leaderboard = LoadAllPlayers();
 
         Collections.sort(Leaderboard);
 
@@ -202,9 +179,11 @@ public class Players {
             return Leaderboard.subList(0, Leaderboard.size());
     }
 
-    private ArrayList<Player> LoadAllPlayers() {
 
-        ArrayList<Player> temp = new ArrayList<>();
+    /*Helper Method used to populate an ArrayList with Players stored in the file*/
+    private ArrayList < Player > LoadAllPlayers() {
+
+        ArrayList < Player > temp = new ArrayList < > ();
 
         try {
             FileReader fileReader = new FileReader(fileHandler.getPlayersFile());
@@ -213,7 +192,7 @@ public class Players {
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] tokens = line.split(" ");
-                if(tokens.length != 5) continue;
+                if (tokens.length != 5) continue;
                 temp.add(new Player(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
             }
         } catch (IOException e) {

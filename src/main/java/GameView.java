@@ -1,11 +1,13 @@
 public class GameView {
 
 
+
+    /*Game View Constructor*/
     public GameView() {
 
     }
 
-
+    /*Display the Cryptogram or Solution*/
     public void displaycryptOrSolution(String cryptOrSolution) {
 
         StringBuilder displaycryptOrSolution = new StringBuilder();
@@ -26,7 +28,6 @@ public class GameView {
     /**
      * Method used to display the users current mapping
      * Similar to the displaycryptOrSolution(String cryptOrSolution) except will handle characters with no mapping
-     *
      * @param userInput
      */
     public void displayUserInput(String userInput) {
@@ -52,6 +53,7 @@ public class GameView {
     }
 
 
+    /*Method to Print Cryptogram ASCII art*/
     public void printLogo() {
         System.out.println("   _____ _______     _______ _______ ____   _____ _____           __  __ \n" +
                 "  / ____|  __ \\ \\   / |  __ |__   __/ __ \\ / ____|  __ \\    /\\   |  \\/  |\n" +
@@ -63,7 +65,9 @@ public class GameView {
                 "                                                                         ");
     }
 
-    //Working but only on UNIX terminal so find something better
+
+    /*Method to Clear test in Unix Terminal
+     *Working but only on UNIX terminal so find something better that works with all operating systems*/
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
