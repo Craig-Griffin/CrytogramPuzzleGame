@@ -3,7 +3,9 @@
 # Edit at https://www.gitignore.io/?templates=git,osx,java,linux,maven,windows,eclipse,intellij
 
 ### Eclipse ###
-
+.attach*
+run/
+test/
 .metadata
 bin/
 tmp/
