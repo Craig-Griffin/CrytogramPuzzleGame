@@ -2,6 +2,17 @@
 
 Project Complete... 
 
+
+| Stage           | Mark          |
+| --------------- | ------------- |
+| User Stories    | 18/24         |
+| Class Diagrams  | 17/18         |
+| Sprint One      | 13/23         |
+| Sprint Two      | 23/29         |
+| Sprint Three    | 23/29         |
+| Final Report    | tbc           |
+| Total           | tbc           |
+
 ### Road Map
 Here is how far we are through the project, and how far we still have to go.
 
