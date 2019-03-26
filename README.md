@@ -3,15 +3,15 @@
 Project Complete... 
 
 
-| Stage           | Mark          |
-| --------------- | ------------- |
-| User Stories    | 18/24         |
-| Class Diagrams  | 17/18         |
-| Sprint One      | 13/23         |
-| Sprint Two      | 23/29         |
-| Sprint Three    | 23/29         |
-| Final Report    | tbc           |
-| **Total**       | tbc           |
+| Stage           | Mark          | Percentage    | 
+| --------------- | ------------- | ------------- |	
+| User Stories    | 18/24         | 75%           |
+| Class Diagrams  | 17/18         | 94%           |
+| Sprint One      | 13/23         | 56%           | 
+| Sprint Two      | 23/29         | 79%           | 
+| Sprint Three    | 23/29         | 79%           | 
+| Final Report    | tbc           | tbc%          |
+| **Total**       | tbc           | tbc%          |
 
 
 
