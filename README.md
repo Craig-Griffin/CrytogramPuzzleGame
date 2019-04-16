@@ -10,8 +10,8 @@ Project Complete...
 | Sprint One      | 13/23         | 56%           | 
 | Sprint Two      | 23/29         | 79%           | 
 | Sprint Three    | 23/29         | 79%           | 
-| Final Report    | tbc           | tbc%          |
-| **Total**       | tbc           | tbc%          |
+| Final Report    | 8/9           | 88%           |
+| **Total**       | 102/132       | 77%           |
 
 
 
